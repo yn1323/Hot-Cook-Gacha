@@ -2,10 +2,6 @@ name: storybook_test
 
 on: [push]
 
-defaults:
-  run:
-    working-directory: web
-
 jobs:
   storybook_test:
     timeout-minutes: 20
