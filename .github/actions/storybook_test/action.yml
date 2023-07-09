@@ -1,0 +1,66 @@
+inputs:
+  GCP_PROJECT_ID:
+    description: "GCP_PROJECT_ID"
+    required: true
+  GCP_CLIENT_EMAIL:
+    description: "GCP_CLIENT_EMAIL"
+    required: true
+  GCP_PRIVATE_KEY:
+    description: "GCP_PRIVATE_KEY"
+    required: true
+  GCP_PRIVATE_KEY_ID:
+    description: "GCP_PRIVATE_KEY_ID"
+    required: true
+  X_API_KEY:
+    description: "X_API_KEY"
+    required: true
+  NEXT_PUBLIC_FIREBASE_API_KEY:
+    description: "NEXT_PUBLIC_FIREBASE_API_KEY"
+    required: true
+  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:
+    description: "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN"
+    required: true
+  NEXT_PUBLIC_FIREBASE_PROJECT_ID:
+    description: "NEXT_PUBLIC_FIREBASE_PROJECT_ID"
+    required: true
+  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET:
+    description: "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET"
+    required: true
+  NEXT_PUBLIC_FIREBASE_APP_ID:
+    description: "NEXT_PUBLIC_FIREBASE_APP_ID"
+    required: true
+  DEV_FIRESTORE_COLLECTION:
+    description: "DEV_FIRESTORE_COLLECTION"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Use Node.js v18
+      uses: actions/setup-node@v3
+      with:
+        node-version: "18.x"
+    - name: Install dependencies
+      run: cd web && npm ci
+      shell: bash
+    - name: "Create env file"
+      shell: bash
+      run: |
+        touch .env
+        echo GCP_PROJECT_ID="${{ inputs.GCP_PROJECT_ID }}" >> .env
+        echo GCP_CLIENT_EMAIL="${{ inputs.GCP_CLIENT_EMAIL }}" >> .env
+        echo GCP_PRIVATE_KEY="${{ inputs.GCP_PRIVATE_KEY }}" >> .env
+        echo GCP_PRIVATE_KEY_ID="${{ inputs.GCP_PRIVATE_KEY_ID }}" >> .env
+        echo X_API_KEY="${{ inputs.X_API_KEY }}" >> .env
+        echo NEXT_PUBLIC_FIREBASE_API_KEY="${{ inputs.NEXT_PUBLIC_FIREBASE_API_KEY }}" >> .env
+        echo NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="${{ inputs.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}" >> .env
+        echo NEXT_PUBLIC_FIREBASE_PROJECT_ID="${{ inputs.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}" >> .env
+        echo NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="${{ inputs.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}" >> .env
+        echo NEXT_PUBLIC_FIREBASE_APP_ID="${{ inputs.NEXT_PUBLIC_FIREBASE_APP_ID }}" >> .env
+        echo DEV_FIRESTORE_COLLECTION="${{ inputs.DEV_FIRESTORE_COLLECTION }}" >> .env
+    - name: Build storybook
+      run: npm run build-storybook
+      shell: bash
+    - name: Storybook test
+      run: npm run test-storybook:ci
+      shell: bash

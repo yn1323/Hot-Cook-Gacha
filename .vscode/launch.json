@@ -1,0 +1,17 @@
+{
+  "version": "0.3.0",
+  "configurations": [
+    {
+      "command": "npm run storybook",
+      "name": "Storybook",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "rm -r ./.next && npm run dev",
+      "name": "Next.js dev",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}
