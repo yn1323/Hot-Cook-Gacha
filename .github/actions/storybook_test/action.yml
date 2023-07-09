@@ -41,7 +41,7 @@ runs:
       with:
         node-version: "18.x"
     - name: Install dependencies
-      run: cd web && npm ci
+      run: npm ci
       shell: bash
     - name: "Create env file"
       shell: bash
