@@ -1,14 +1,18 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react'
 import { FormProviderDecorator } from '@/config/Decorators'
-import { SpMenu  } from ".";
+import { SpMenu } from '.'
 
 const meta = {
   title: 'layout/SpMenu',
-  component: SpMenu ,
-  args: {},
-  parameters: {},
+  component: SpMenu,
+  args: {
+    children: <div>content</div>,
+  },
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: [FormProviderDecorator],
-} satisfies Meta<typeof SpMenu >;
-export default meta;
+} satisfies Meta<typeof SpMenu>
+export default meta
 
-export const Basic: StoryObj<typeof meta> = {};
+export const Basic: StoryObj<typeof meta> = {}

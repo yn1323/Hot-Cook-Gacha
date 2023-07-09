@@ -8,7 +8,7 @@ const font = Noto_Sans_JP({
 })
 
 export const metadata: Metadata = {
-  title: 'POG-Portal',
+  title: 'ホットクック献立ガチャ',
   robots: {
     googleBot: 'false',
     index: false,

@@ -1,4 +1,4 @@
-import { PcMenu } from '@/component/layout/PcMenu'
+import { SpMenu } from '@/component/layout/SpMenu'
 import { GetSelf } from '@/page/(auth)/auth/self/route'
 import { PostUser } from '@/page/(auth)/users/[userId]/route'
 import { serverFetch } from '@/page/_src/api'
@@ -20,28 +20,13 @@ async function accountExistCheck() {
   })
 }
 
-async function initialize() {
-  const { user } = await serverFetch<GetSelf>('/auth/self')
-  if (!user) {
-    return { name: '', uid: '' }
-  }
-  return user
-}
-
 const AuthTemplate = async ({
   children,
 }: {
   children: JSX.Element | JSX.Element[]
 }) => {
   await accountExistCheck()
-
-  const { name } = await initialize()
-  return (
-    <PcMenu>
-      <div>name: {name}</div>
-      <div>{children}</div>
-    </PcMenu>
-  )
+  return <SpMenu>{children}</SpMenu>
 }
 
 export default AuthTemplate
