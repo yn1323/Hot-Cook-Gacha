@@ -13,7 +13,7 @@ async function initialize() {
   return user
 }
 
-const Config = async () => {
+const MyPage = async () => {
   const { name, picture, uid } = await initialize()
 
   return (
@@ -29,4 +29,4 @@ const Config = async () => {
   )
 }
 
-export default Config
+export default MyPage

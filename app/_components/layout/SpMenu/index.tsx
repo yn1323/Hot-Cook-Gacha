@@ -6,11 +6,13 @@ import { Box, HStack, VStack, Text } from '@chakra-ui/layout'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { AiFillHome } from 'react-icons/ai'
+import { BiLogOut } from 'react-icons/bi'
 import {
   BsFillCalendarCheckFill,
   BsFillPersonFill,
   BsSearch,
 } from 'react-icons/bs'
+import { useSession } from '@/hooks/auth/useSession'
 
 const Icons = [
   { label: 'Top', icon: AiFillHome, link: '/dashboard' },
@@ -35,9 +37,25 @@ type Props = {
 
 export const SpMenu = ({ children }: Props) => {
   const router = useRouter()
+  const { logout } = useSession()
   return (
     <VStack position="relative">
-      <Box mb={NavHeight}>{children}</Box>
+      <Box py={4} px={4} w="100%">
+        <HStack justifyContent="space-between" w="100%">
+          <Text as="h1" fontSize="3xl">
+            TOP
+          </Text>
+          <Button
+            colorScheme="green"
+            variant="ghost"
+            leftIcon={<BiLogOut />}
+            onClick={logout}
+          >
+            ログアウト
+          </Button>
+        </HStack>
+        <Box mb={NavHeight}>{children}</Box>
+      </Box>
       <HStack
         position="fixed"
         bottom={0}

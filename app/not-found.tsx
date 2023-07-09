@@ -2,13 +2,18 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { PageNotFound } from '@/component/feature/error/PageNotFound'
 
 export default function RootNotFound() {
   const router = useRouter()
   useEffect(() => {
     setTimeout(() => {
-      router.push('/')
-    }, 2000)
+      router.back()
+    }, 2500)
   }, [router])
-  return <main>404 Error. Redirect to TOP page</main>
+  return (
+    <main>
+      <PageNotFound />
+    </main>
+  )
 }

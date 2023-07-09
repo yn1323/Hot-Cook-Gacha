@@ -32,7 +32,11 @@ export const GET = async (_: NextRequest) => {
 
   return NextResponse.json({
     isAuthenticated: true,
-    isUserExistInDb: !!firestoreUser,
-    user: firestoreUser.user ?? user,
+    isUserExistInDb:
+      firestoreUser.user && !!Object.keys(firestoreUser.user).length,
+    user:
+      firestoreUser.user && Object.keys(firestoreUser.user).length
+        ? firestoreUser.user
+        : user,
   })
 }
