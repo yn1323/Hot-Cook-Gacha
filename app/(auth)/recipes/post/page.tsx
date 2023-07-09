@@ -10,10 +10,14 @@ async function initialize() {
   return user
 }
 
-const {{ inputs.component | pascal }} = async () => {
-  await initialize()
+const Post = async () => {
+  const { uid } = await initialize()
 
-  return <Animation><div>main</div></Animation>;
-};
+  return (
+    <Animation>
+      <div>main</div>
+    </Animation>
+  )
+}
 
-export default {{ inputs.component | pascal }};
+export default Post

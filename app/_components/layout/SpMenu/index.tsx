@@ -12,6 +12,7 @@ import {
   BsFillPersonFill,
   BsSearch,
 } from 'react-icons/bs'
+import { MdPostAdd } from 'react-icons/md'
 import { useSession } from '@/hooks/auth/useSession'
 
 const Icons = [
@@ -20,7 +21,12 @@ const Icons = [
   {
     label: 'レシピ 検索',
     icon: BsSearch,
-    link: '/search',
+    link: '/recipes/search',
+  },
+  {
+    label: '投稿',
+    icon: MdPostAdd,
+    link: '/recipes/post',
   },
   {
     label: 'マイページ',
