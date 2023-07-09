@@ -4,17 +4,10 @@ on:
   pull_request:
     types: [ready_for_review]
 
-defaults:
-  run:
-    working-directory: web
-
 jobs:
   chromatic_pr_on_ready:
     if: (github.event.pull_request.draft == false && !contains(github.event.pull_request.labels.*.name , 'renovate'))
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: web
     steps:
       - uses: actions/checkout@v3
         with:

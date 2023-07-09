@@ -2,10 +2,6 @@ name: build
 
 on: [push]
 
-defaults:
-  run:
-    working-directory: web
-
 jobs:
   build:
     timeout-minutes: 10

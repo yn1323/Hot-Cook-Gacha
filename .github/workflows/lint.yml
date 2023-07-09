@@ -2,10 +2,6 @@ name: lint
 
 on: [push]
 
-defaults:
-  run:
-    working-directory: web
-
 jobs:
   lint:
     timeout-minutes: 10

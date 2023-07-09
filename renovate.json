@@ -6,7 +6,6 @@
   "baseBranches": ["main"],
   "automerge": true,
   "schedule": ["every weekend"],
-  "additionalBranchPrefix": "{{baseDir}}-",
   "packageRules": [
     {
       "matchPackagePatterns": ["eslint"],
