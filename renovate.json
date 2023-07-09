@@ -1,0 +1,27 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "timezone": "Asia/Tokyo",
+  "labels": ["renovate"],
+  "baseBranches": ["main"],
+  "automerge": true,
+  "schedule": ["every weekend"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["eslint"],
+      "addLabels": ["ESLint"]
+    },
+    {
+      "matchPackagePatterns": ["storybook", "@storybook"],
+      "addLabels": ["Storybook"]
+    },
+    {
+      "matchPackagePatterns": ["react"],
+      "addLabels": ["React"]
+    },
+    {
+      "matchPackagePatterns": ["@chakra-ui", "@emotion", "framer-motion"],
+      "addLabels": ["ChakraUI"]
+    }
+  ]
+}
