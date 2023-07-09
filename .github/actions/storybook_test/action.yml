@@ -33,10 +33,6 @@ inputs:
     description: "DEV_FIRESTORE_COLLECTION"
     required: true
 
-defaults:
-  run:
-    working-directory: web
-
 runs:
   using: "composite"
   steps:

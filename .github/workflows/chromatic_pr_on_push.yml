@@ -10,6 +10,9 @@ jobs:
   chromatic_pr_on_push:
     if: (github.event.pull_request.draft == false && !contains(github.head_ref, 'renovate/'))
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v3
         with:
