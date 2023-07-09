@@ -2,6 +2,10 @@ name: lint
 
 on: [push]
 
+defaults:
+  run:
+    working-directory: web
+
 jobs:
   lint:
     timeout-minutes: 10
@@ -15,6 +19,6 @@ jobs:
         with:
           node-version: "18.x"
       - name: Install dependencies
-        run: cd web && npm ci
+        run: npm ci
       - name: Lint
         run: npm run lint

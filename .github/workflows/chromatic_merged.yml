@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    working-directory: web
+
 jobs:
   chromatic_merged:
     runs-on: ubuntu-latest

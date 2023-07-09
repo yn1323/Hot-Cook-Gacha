@@ -2,6 +2,10 @@ name: build
 
 on: [push]
 
+defaults:
+  run:
+    working-directory: web
+
 jobs:
   build:
     timeout-minutes: 10
@@ -15,7 +19,7 @@ jobs:
         with:
           node-version: "18.x"
       - name: Install dependencies
-        run: cd web && npm ci
+        run: npm ci
       - name: Build
         run: npm run build
         env:

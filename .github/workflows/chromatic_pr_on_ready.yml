@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [ready_for_review]
 
+defaults:
+  run:
+    working-directory: web
+
 jobs:
   chromatic_pr_on_ready:
     if: (github.event.pull_request.draft == false && !contains(github.event.pull_request.labels.*.name , 'renovate'))
