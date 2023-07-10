@@ -3,7 +3,6 @@
 import {
   Box,
   FormControl,
-  FormLabel,
   HStack,
   TagCloseButton,
   TagLabel,
@@ -57,7 +56,6 @@ export const Tag = () => {
 
   return (
     <FormControl id="tag">
-      <FormLabel>タグ</FormLabel>
       <VStack w="100%" border="1px" borderColor="gray.200" borderRadius="md">
         <Box
           borderBottom="1px"
@@ -112,7 +110,7 @@ export const Tag = () => {
                 _hover={{ cursor: 'pointer' }}
                 key={index}
                 borderRadius="md"
-                variant="subtle"
+                variant="outline"
                 colorScheme="green"
                 size="lg"
                 onClick={() => {
