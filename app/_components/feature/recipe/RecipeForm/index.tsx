@@ -1,10 +1,11 @@
 'use client'
 
-import { VStack } from '@chakra-ui/layout'
+import { Divider, VStack } from '@chakra-ui/layout'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { DescriptionInput } from '@/component/form/Recipe/DescriptionInput'
+import { ImageInput } from '@/component/form/Recipe/ImageInput'
 import { TitleInput } from '@/component/form/Recipe/TitleInput'
 import { recipeSchemas } from '@/constants/validations'
 
@@ -23,6 +24,8 @@ export const RecipeForm = ({}: Props) => {
       <VStack w="100%" spacing={6}>
         <TitleInput />
         <DescriptionInput />
+        <ImageInput label="料理の写真" url="" />
+        <Divider />
       </VStack>
     </FormProvider>
   )

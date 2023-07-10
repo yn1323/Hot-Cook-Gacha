@@ -5,11 +5,12 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { FormProviderDecorator } from '@/config/Decorators'
-import { {{ inputs.component | pascal }} } from '.'
+import { recipeSchemas } from '@/constants/validations'
+import { RecipeTypeSelect } from '.'
 
 const meta = {
-  title: '{{ inputs.path }}/{{ inputs.component | pascal }}',
-  component: {{ inputs.component | pascal }},
+  title: 'form/Recipe/RecipeTypeSelect',
+  component: RecipeTypeSelect,
   args: {
     disabled: false,
   },
@@ -17,7 +18,7 @@ const meta = {
   decorators: [
     FormProviderDecorator,
     (_, { args }) => {
-      const Schema = z.object({ {{ inputs.name }}: ZODSCHEMA })
+      const Schema = z.object({ type: recipeSchemas.shape.type })
       type SchemaType = z.infer<typeof Schema>
       const methods = useForm<SchemaType>({
         resolver: zodResolver(Schema),
@@ -27,7 +28,7 @@ const meta = {
       return (
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <{{ inputs.component | pascal }} {...args}/>
+            <RecipeTypeSelect {...args} />
             <Box textAlign="right">
               <Button colorScheme="green" mt={4} type="submit">
                 Submit
@@ -38,7 +39,7 @@ const meta = {
       )
     },
   ],
-} satisfies Meta<typeof {{ inputs.component | pascal }}>
+} satisfies Meta<typeof RecipeTypeSelect>
 export default meta
 
 export const Basic: StoryObj<typeof meta> = {}

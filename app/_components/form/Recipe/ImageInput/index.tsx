@@ -25,10 +25,10 @@ const AcceptImageType = ['image/png', 'image/jpeg', 'image/gif']
 const MaxImageSize = 10 // MB
 
 type Props = {
-  url: string
+  url?: string
   label: string
 }
-export const ImageInput = ({ url, label }: Props) => {
+export const ImageInput = ({ url = '', label }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [uploadedImage, setUploadedImage] = useState<string | null>(null)

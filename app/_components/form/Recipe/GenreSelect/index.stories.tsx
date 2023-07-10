@@ -5,11 +5,12 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { FormProviderDecorator } from '@/config/Decorators'
-import { {{ inputs.component | pascal }} } from '.'
+import { recipeSchemas } from '@/constants/validations'
+import { GenreSelect } from '.'
 
 const meta = {
-  title: '{{ inputs.path }}/{{ inputs.component | pascal }}',
-  component: {{ inputs.component | pascal }},
+  title: 'form/Recipe/GenreSelect',
+  component: GenreSelect,
   args: {
     disabled: false,
   },
@@ -17,17 +18,19 @@ const meta = {
   decorators: [
     FormProviderDecorator,
     (_, { args }) => {
-      const Schema = z.object({ {{ inputs.name }}: ZODSCHEMA })
+      const Schema = z.object({ genre: recipeSchemas.shape.genre })
       type SchemaType = z.infer<typeof Schema>
       const methods = useForm<SchemaType>({
         resolver: zodResolver(Schema),
       })
-      const onSubmit: SubmitHandler<SchemaType> = data => {}
+      const onSubmit: SubmitHandler<SchemaType> = data => {
+        console.log(data)
+      }
 
       return (
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <{{ inputs.component | pascal }} {...args}/>
+            <GenreSelect {...args} />
             <Box textAlign="right">
               <Button colorScheme="green" mt={4} type="submit">
                 Submit
@@ -38,7 +41,7 @@ const meta = {
       )
     },
   ],
-} satisfies Meta<typeof {{ inputs.component | pascal }}>
+} satisfies Meta<typeof GenreSelect>
 export default meta
 
 export const Basic: StoryObj<typeof meta> = {}
