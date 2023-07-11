@@ -31,11 +31,14 @@ export const recipeSchemas = z.object({
   type: z.string().nonempty('必須選択です'), // 朝食・昼食・夕食、麺類、ご飯ものなど（セレクトボックスにしたい）
   tags: z.array(z.string()).max(5, 'タグは5個以内にしてください。'), // 任意のタグ
 
-  prepTime: z.number().positive('0以上の数値を入力してください。'), // 調理時間
-  servings: z.number().positive('0以上の数値を入力してください。'), // 何人前
+  prepTime: z.string(), // 調理時間
+  servings: z.string(), // 何人前
   ingredients: z.array(
     z.object({
-      amount: z.number().positive('0以上の数値を入力してください。'),
+      amount: z
+        .string()
+        .nonempty('必須入力です')
+        .max(40, '40文字以内で入力してください。'),
       ingredient: z
         .string()
         .nonempty('必須入力です')

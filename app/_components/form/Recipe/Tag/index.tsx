@@ -2,17 +2,18 @@
 
 import {
   Box,
+  Button,
+  Center,
   FormControl,
+  FormHelperText,
+  FormLabel,
   HStack,
+  Input,
+  Tag as LibTag,
   TagCloseButton,
   TagLabel,
-  VStack,
-  Tag as LibTag,
   Text,
-  Center,
-  FormHelperText,
-  Input,
-  Button,
+  VStack,
 } from '@chakra-ui/react'
 import { useMemo, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -41,7 +42,7 @@ export const Tag = () => {
     tags: string[]
   }>()
   watch('tags')
-  const selectedTags = getValues('tags')
+  const selectedTags = getValues('tags') ?? []
 
   const handleAddTag = () => {
     if (originalTag.length > MaxOriginalTagLength) return
@@ -56,6 +57,7 @@ export const Tag = () => {
 
   return (
     <FormControl id="tag">
+      <FormLabel>タグ</FormLabel>
       <VStack w="100%" border="1px" borderColor="gray.200" borderRadius="md">
         <Box
           borderBottom="1px"
@@ -114,7 +116,7 @@ export const Tag = () => {
                 colorScheme="green"
                 size="lg"
                 onClick={() => {
-                  setValue('tags', [...getValues('tags'), tag])
+                  setValue('tags', [...selectedTags, tag])
                 }}
               >
                 <TagLabel>{tag}</TagLabel>

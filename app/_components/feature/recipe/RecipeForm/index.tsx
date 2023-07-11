@@ -5,7 +5,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { DescriptionInput } from '@/component/form/Recipe/DescriptionInput'
+import { GenreSelect } from '@/component/form/Recipe/GenreSelect'
 import { ImageInput } from '@/component/form/Recipe/ImageInput'
+import { RecipeTypeSelect } from '@/component/form/Recipe/RecipeTypeSelect'
+import { Tag } from '@/component/form/Recipe/Tag'
 import { TitleInput } from '@/component/form/Recipe/TitleInput'
 import { recipeSchemas } from '@/constants/validations'
 
@@ -26,6 +29,9 @@ export const RecipeForm = ({}: Props) => {
         <DescriptionInput />
         <ImageInput label="料理の写真" url="" />
         <Divider />
+        <GenreSelect />
+        <RecipeTypeSelect />
+        <Tag />
       </VStack>
     </FormProvider>
   )
