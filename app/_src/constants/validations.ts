@@ -48,34 +48,38 @@ export const recipeSchemas = z.object({
       unit: z.string().optional(), // 単位（セレクトボックスにしたい）
     })
   ),
-  preDirections: z.array(
-    z.object({
-      direction: z
-        .string()
-        .nonempty('必須入力です')
-        .max(200, '1ステップ 200文字以内で入力してください。'),
-      image: z.string().optional(),
-    })
-  ),
+  preDirections: z
+    .array(
+      z.object({
+        direction: z
+          .string()
+          .max(400, '1ステップ 400文字以内で入力してください。'),
+        image: z.string().optional(),
+      })
+    )
+    .max(20, '20ステップ以内で入力してください。'),
   hotcookDirections: z
     .array(
       z.object({
         direction: z
           .string()
           .nonempty('必須入力です')
-          .max(200, '1ステップ 200文字以内で入力してください。'),
+          .max(400, '400文字以内で入力してください。'),
         image: z.string().optional(),
       })
     )
     .nonempty('必須入力です'),
-  postDirections: z.array(
-    z.object({
-      direction: z
-        .string()
-        .nonempty('必須入力です')
-        .max(200, '1ステップ 200文字以内で入力してください。'),
-      image: z.string().optional(),
-    })
-  ),
+  postDirections: z
+    .array(
+      z.object({
+        direction: z
+          .string()
+          .nonempty('必須入力です')
+          .max(400, '1ステップ 400文字以内で入力してください。'),
+        image: z.string().optional(),
+      })
+    )
+    .max(20, '20ステップ以内で入力してください。'),
+
   status: z.string().optional(), // 公開・非公開（セレクトボックスにしたい）
 })

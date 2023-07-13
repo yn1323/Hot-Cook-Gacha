@@ -1,20 +1,19 @@
 'use client'
 
 import {
+  Box,
+  Center,
   FormControl,
-  FormHelperText,
   FormLabel,
+  HStack,
+  Icon,
+  IconButton,
+  Image,
   Input,
   InputGroup,
-  Image,
-  HStack,
-  Box,
-  IconButton,
-  Center,
-  Icon,
   Skeleton,
 } from '@chakra-ui/react'
-import { useMemo, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { AiFillCamera } from 'react-icons/ai'
 import { FiDelete } from 'react-icons/fi'
@@ -33,16 +32,7 @@ export const ImageInput = ({ url = '', label }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [uploadedImage, setUploadedImage] = useState<string | null>(null)
   const { errorToast } = useCustomToast()
-  const {
-    register,
-    formState: { errors },
-    setValue,
-  } = useFormContext<{ image: string }>()
-
-  const errorMessage = useMemo(
-    () => errors.image?.message,
-    [errors.image?.message]
-  )
+  const { register, setValue } = useFormContext<{ image: string }>()
 
   const onClickButton = () => {
     inputRef.current?.click()
@@ -57,7 +47,7 @@ export const ImageInput = ({ url = '', label }: Props) => {
   }
 
   return (
-    <FormControl id="image" isInvalid={!!errors.image}>
+    <FormControl id="image">
       <FormLabel>{label}</FormLabel>
       <InputGroup>
         <HStack justifyContent={'space-around'} w="100%">
@@ -140,9 +130,6 @@ export const ImageInput = ({ url = '', label }: Props) => {
           {...register('image')}
         />
       </InputGroup>
-      {errorMessage && (
-        <FormHelperText color="crimson">{errorMessage}</FormHelperText>
-      )}
     </FormControl>
   )
 }
