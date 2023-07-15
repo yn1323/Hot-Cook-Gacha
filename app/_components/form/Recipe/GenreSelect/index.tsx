@@ -9,6 +9,7 @@ import {
 import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { RequiredBadge } from '@/component/form/Recipe/RequiredBadge'
+import { GenreOptions } from '@/constants/recipes'
 
 type Props = {
   required?: boolean
@@ -32,12 +33,11 @@ export const GenreSelect = ({ required }: Props) => {
         {required && <RequiredBadge ml={4} />}
       </FormLabel>
       <Select placeholder="ジャンルを選択してください" {...register('genre')}>
-        <option value="homemade">家庭料理</option>
-        <option value="japanese">和風</option>
-        <option value="western">洋風</option>
-        <option value="chinese">中華</option>
-        <option value="ethnic">エスニック</option>
-        <option value="other">その他</option>
+        {GenreOptions.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
       </Select>
       {errorMessage && (
         <FormHelperText color="crimson">{errorMessage}</FormHelperText>

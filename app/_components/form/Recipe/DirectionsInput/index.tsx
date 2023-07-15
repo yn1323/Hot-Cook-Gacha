@@ -108,24 +108,26 @@ export const DirectionsInput = ({ name, label }: Props) => {
             <InputGroup>
               <VStack w="100%">
                 <HStack w="100%">
-                  <Controller
-                    control={control}
-                    name={`${name}.${index}.direction`}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <Textarea
-                        placeholder={`${label} 手順${index + 1}`}
-                        data-testid="direction"
-                        maxLength={500}
-                        {...field}
-                      />
+                  <Box w="100%">
+                    <Controller
+                      control={control}
+                      name={`${name}.${index}.direction`}
+                      defaultValue=""
+                      render={({ field }) => (
+                        <Textarea
+                          placeholder={`${label} 手順${index + 1}`}
+                          data-testid="direction"
+                          maxLength={500}
+                          {...field}
+                        />
+                      )}
+                    />
+                    {errorMessages?.[index]?.direction && (
+                      <FormHelperText color="crimson">
+                        {errorMessages?.[index]?.direction?.message}
+                      </FormHelperText>
                     )}
-                  />
-                  {errorMessages?.[index]?.direction && (
-                    <FormHelperText color="crimson">
-                      {errorMessages?.[index]?.direction?.message}
-                    </FormHelperText>
-                  )}
+                  </Box>
                   <Flex w={40} h="100%">
                     {field.image ? (
                       <Box position="relative">

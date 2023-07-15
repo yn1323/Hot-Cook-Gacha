@@ -29,7 +29,7 @@ export const recipeSchemas = z.object({
   image: z.string().optional(),
   genre: z.string().nonempty('必須選択です'), // 洋風・和風など（セレクトボックスにしたい）
   type: z.string().nonempty('必須選択です'), // 朝食・昼食・夕食、麺類、ご飯ものなど（セレクトボックスにしたい）
-  prepTime: z.string(), // 調理時間
+  prepTime: z.number(), // 調理時間
 
   servings: z.string(), // 何人前
   ingredients: z.array(
@@ -73,7 +73,6 @@ export const recipeSchemas = z.object({
       z.object({
         direction: z
           .string()
-          .nonempty('必須入力です')
           .max(400, '1ステップ 400文字以内で入力してください。'),
         image: z.string().optional(),
       })
@@ -81,5 +80,5 @@ export const recipeSchemas = z.object({
     .max(20, '20ステップ以内で入力してください。'),
 
   status: z.enum(['draft', 'public', 'private']), // 公開・非公開
-  tags: z.array(z.string()).max(5, 'タグは5個以内にしてください。'), // 任意のタグ
+  tags: z.array(z.string()).max(5, 'タグは5個以内にしてください。').optional(), // 任意のタグ
 })

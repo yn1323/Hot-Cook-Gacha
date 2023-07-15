@@ -9,6 +9,7 @@ import {
 import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { RequiredBadge } from '@/component/form/Recipe/RequiredBadge'
+import { PrepTimeOptions } from '@/constants/recipes'
 
 type Props = {
   required?: boolean
@@ -31,14 +32,12 @@ export const PrepTimeSelect = ({ required }: Props) => {
         準備時間（ホットクックを除く）
         {required && <RequiredBadge ml={4} />}
       </FormLabel>
-      <Select {...register('prepTime')}>
-        <option value="5">5分</option>
-        <option value="10">10分</option>
-        <option value="15">15分</option>
-        <option value="30">30分</option>
-        <option value="60">1時間</option>
-        <option value="90">1.5時間</option>
-        <option value="moreThan120">2時間以上</option>
+      <Select {...register('prepTime', { valueAsNumber: true })}>
+        {PrepTimeOptions.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
       </Select>
       {errorMessage && (
         <FormHelperText color="crimson">{errorMessage}</FormHelperText>

@@ -12,7 +12,7 @@ const meta = {
   title: 'form/Recipe/DirectionsInput',
   component: DirectionsInput,
   args: {
-    name: 'preDirections',
+    name: 'hotcookDirections',
     label: '準備・下ごしらえ',
   },
   parameters: {},

@@ -17,6 +17,7 @@ import { Fragment, useEffect, useMemo } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { z } from 'zod'
 import { RequiredBadge } from '@/component/form/Recipe/RequiredBadge'
+import { MarkOptions, UnitOptions } from '@/constants/recipes'
 import { recipeSchemas } from '@/constants/validations'
 
 type Props = {
@@ -105,16 +106,11 @@ export const IngredientsInput = ({ required }: Props) => {
                     defaultValue=""
                     render={({ field }) => (
                       <Select {...field}>
-                        <option value="">単位なし</option>
-                        <option value="g">g</option>
-                        <option value="ml">ml</option>
-                        <option value="ko">個</option>
-                        <option value="hon">本</option>
-                        <option value="mai">枚</option>
-                        <option value="fukuro">袋</option>
-                        <option value="can">缶</option>
-                        <option value="tableSpoon">大さじ</option>
-                        <option value="teaSpoon">小さじ</option>
+                        {UnitOptions.map(({ value, label }) => (
+                          <option key={value} value={value}>
+                            {label}
+                          </option>
+                        ))}
                       </Select>
                     )}
                   />
@@ -128,11 +124,11 @@ export const IngredientsInput = ({ required }: Props) => {
                     defaultValue=""
                     render={({ field }) => (
                       <Select {...field}>
-                        <option value="">-</option>
-                        <option value="circle">●</option>
-                        <option value="triangle">▲</option>
-                        <option value="square">■</option>
-                        <option value="star">★</option>
+                        {MarkOptions.map(({ value, label }) => (
+                          <option key={value} value={value}>
+                            {label}
+                          </option>
+                        ))}
                       </Select>
                     )}
                   />
