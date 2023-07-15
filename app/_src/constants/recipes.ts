@@ -8,6 +8,14 @@ export const PrepTimeOptions = [
   { value: 120, label: '2時間以上' },
 ]
 
+export const ServingOptions = [
+  { value: 1, label: '1人前' },
+  { value: 2, label: '2人前' },
+  { value: 3, label: '3人前' },
+  { value: 4, label: '4人前' },
+  { value: 5, label: '5人前以上' },
+]
+
 export const GenreOptions = [
   { value: 'homemade', label: '家庭料理' },
   { value: 'japanese', label: '和風' },

@@ -9,6 +9,7 @@ import {
 import { useEffect, useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { RequiredBadge } from '@/component/form/Recipe/RequiredBadge'
+import { ServingOptions } from '@/constants/recipes'
 
 type Props = {
   required?: boolean
@@ -37,11 +38,11 @@ export const ServingSelect = ({ required }: Props) => {
         {required && <RequiredBadge ml={4} />}
       </FormLabel>
       <Select {...register('servings')}>
-        <option value="1">1人前</option>
-        <option value="2">2人前</option>
-        <option value="3">3人前</option>
-        <option value="4">4人前</option>
-        <option value="moreThan5">5人前以上</option>
+        {ServingOptions.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
       </Select>
       {errorMessage && (
         <FormHelperText color="crimson">{errorMessage}</FormHelperText>
