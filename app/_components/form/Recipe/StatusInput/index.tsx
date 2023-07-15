@@ -9,12 +9,10 @@ import {
 } from '@chakra-ui/react'
 import { useFormContext } from 'react-hook-form'
 
-type Props = {
-  disabled?: boolean
-}
+type Props = {}
 
-export const StatusInput = ({ disabled }: Props) => {
-  const { setValue, getValues } = useFormContext<{ status: string }>()
+export const StatusInput = ({}: Props) => {
+  const { setValue, getValues, watch } = useFormContext<{ status: string }>()
 
   return (
     <FormControl id="status">
@@ -24,12 +22,12 @@ export const StatusInput = ({ disabled }: Props) => {
         </FormLabel>
         <InputGroup>
           <Checkbox
-            disabled={disabled}
             data-testid="status"
             onChange={e => {
               setValue('status', e.target.checked ? 'public' : 'private')
             }}
-            value={`${getValues('status') === 'public'}`}
+            checked={getValues('status') === 'public'}
+            defaultChecked={getValues('status') === 'public'}
           />
         </InputGroup>
       </HStack>

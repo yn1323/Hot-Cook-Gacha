@@ -29,11 +29,9 @@ export const IngredientsInput = ({ required }: Props) => {
     formState: { errors },
     setValue,
     getValues,
-    watch,
   } = useFormContext<{
     ingredients: z.infer<typeof recipeSchemas.shape.ingredients>
   }>()
-  watch('ingredients')
 
   const errorMessages = useMemo(() => errors.ingredients, [errors.ingredients])
 

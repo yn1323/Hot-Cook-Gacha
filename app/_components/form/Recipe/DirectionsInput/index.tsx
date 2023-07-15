@@ -110,7 +110,7 @@ export const DirectionsInput = ({ name, label }: Props) => {
                 <HStack w="100%">
                   <Controller
                     control={control}
-                    name={`preDirections.${index}.direction`}
+                    name={`${name}.${index}.direction`}
                     defaultValue=""
                     render={({ field }) => (
                       <Textarea
@@ -259,7 +259,7 @@ export const DirectionsInput = ({ name, label }: Props) => {
           追加
         </Button>
       )}
-      <FormControl id="preDirections" isInvalid={!!errorMessages?.message}>
+      <FormControl id={name} isInvalid={!!errorMessages?.message}>
         {errorMessages?.message && (
           <FormHelperText color="crimson">
             {errorMessages?.message}

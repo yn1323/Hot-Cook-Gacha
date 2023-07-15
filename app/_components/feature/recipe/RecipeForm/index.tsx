@@ -21,10 +21,13 @@ import { recipeSchemas } from '@/constants/validations'
 const Schema = recipeSchemas
 type SchemaType = z.infer<typeof Schema>
 
-type Props = {}
+type Props = {
+  defaultValues?: SchemaType
+}
 
-export const RecipeForm = ({}: Props) => {
+export const RecipeForm = ({ defaultValues }: Props) => {
   const methods = useForm<SchemaType>({
+    ...(defaultValues ? { defaultValues } : {}),
     resolver: zodResolver(Schema),
   })
 

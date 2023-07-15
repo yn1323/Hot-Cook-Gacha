@@ -41,6 +41,8 @@ export const Tag = () => {
   } = useFormContext<{
     tags: string[]
   }>()
+
+  // TODO
   watch('tags')
   const selectedTags = getValues('tags') ?? []
 

@@ -29,8 +29,8 @@ export const recipeSchemas = z.object({
   image: z.string().optional(),
   genre: z.string().nonempty('必須選択です'), // 洋風・和風など（セレクトボックスにしたい）
   type: z.string().nonempty('必須選択です'), // 朝食・昼食・夕食、麺類、ご飯ものなど（セレクトボックスにしたい）
-
   prepTime: z.string(), // 調理時間
+
   servings: z.string(), // 何人前
   ingredients: z.array(
     z.object({
