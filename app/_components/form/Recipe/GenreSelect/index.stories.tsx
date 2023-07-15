@@ -11,9 +11,7 @@ import { GenreSelect } from '.'
 const meta = {
   title: 'form/Recipe/GenreSelect',
   component: GenreSelect,
-  args: {
-    disabled: false,
-  },
+  args: {},
   parameters: {},
   decorators: [
     FormProviderDecorator,

@@ -81,5 +81,5 @@ export const recipeSchemas = z.object({
     )
     .max(20, '20ステップ以内で入力してください。'),
 
-  status: z.string().optional(), // 公開・非公開（セレクトボックスにしたい）
+  status: z.enum(['draft', 'public', 'private']), // 公開・非公開
 })

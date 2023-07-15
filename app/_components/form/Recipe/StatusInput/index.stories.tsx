@@ -6,19 +6,22 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { FormProviderDecorator } from '@/config/Decorators'
 import { recipeSchemas } from '@/constants/validations'
-import { ServingSelect } from '.'
+import { StatusInput } from '.'
 
 const meta = {
-  title: 'form/Recipe/ServingSelect',
-  component: ServingSelect,
-  args: {},
+  title: 'form/Recipe/StatusInput',
+  component: StatusInput,
+  args: {
+    disabled: false,
+  },
   parameters: {},
   decorators: [
     FormProviderDecorator,
     (_, { args }) => {
-      const Schema = z.object({ servings: recipeSchemas.shape.servings })
+      const Schema = z.object({ status: recipeSchemas.shape.status })
       type SchemaType = z.infer<typeof Schema>
       const methods = useForm<SchemaType>({
+        defaultValues: { status: 'private' },
         resolver: zodResolver(Schema),
       })
       const onSubmit: SubmitHandler<SchemaType> = data => {}
@@ -26,7 +29,7 @@ const meta = {
       return (
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <ServingSelect {...args} />
+            <StatusInput {...args} />
             <Box textAlign="right">
               <Button colorScheme="green" mt={4} type="submit">
                 Submit
@@ -37,7 +40,7 @@ const meta = {
       )
     },
   ],
-} satisfies Meta<typeof ServingSelect>
+} satisfies Meta<typeof StatusInput>
 export default meta
 
 export const Basic: StoryObj<typeof meta> = {}

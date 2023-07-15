@@ -2,19 +2,17 @@
 
 import {
   FormControl,
+  FormHelperText,
   FormLabel,
   InputGroup,
-  FormHelperText,
   Textarea,
 } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-type Props = {
-  disabled?: boolean
-}
+type Props = {}
 
-export const DescriptionInput = ({ disabled }: Props) => {
+export const DescriptionInput = ({}: Props) => {
   const {
     register,
     formState: { errors },
@@ -30,7 +28,6 @@ export const DescriptionInput = ({ disabled }: Props) => {
       <FormLabel>紹介文</FormLabel>
       <InputGroup>
         <Textarea
-          disabled={disabled}
           data-testid="description"
           role="textbox"
           maxLength={64}

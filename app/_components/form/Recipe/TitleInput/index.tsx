@@ -2,21 +2,22 @@
 
 import {
   FormControl,
-  FormLabel,
-  InputGroup,
-  Input,
-  InputLeftElement,
   FormHelperText,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftElement,
 } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { MdOutlineTitle } from 'react-icons/md'
+import { RequiredBadge } from '@/component/form/Recipe/RequiredBadge'
 
 type Props = {
-  disabled?: boolean
+  required?: boolean
 }
 
-export const TitleInput = ({ disabled }: Props) => {
+export const TitleInput = ({ required }: Props) => {
   const {
     register,
     formState: { errors },
@@ -29,13 +30,15 @@ export const TitleInput = ({ disabled }: Props) => {
 
   return (
     <FormControl id="title" isInvalid={!!errors.title}>
-      <FormLabel>料理名</FormLabel>
+      <FormLabel>
+        料理名
+        {required && <RequiredBadge ml={4} />}
+      </FormLabel>
       <InputGroup>
         <InputLeftElement color="gray.300" pointerEvents="none">
           <MdOutlineTitle />
         </InputLeftElement>
         <Input
-          disabled={disabled}
           data-testid="title"
           role="textbox"
           maxLength={64}

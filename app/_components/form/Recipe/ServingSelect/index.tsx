@@ -8,12 +8,13 @@ import {
 } from '@chakra-ui/react'
 import { useEffect, useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { RequiredBadge } from '@/component/form/Recipe/RequiredBadge'
 
 type Props = {
-  disabled?: boolean
+  required?: boolean
 }
 
-export const ServingSelect = ({ disabled }: Props) => {
+export const ServingSelect = ({ required }: Props) => {
   const {
     register,
     formState: { errors },
@@ -31,7 +32,10 @@ export const ServingSelect = ({ disabled }: Props) => {
 
   return (
     <FormControl id="servings" isInvalid={!!errors.servings}>
-      <FormLabel>分量</FormLabel>
+      <FormLabel>
+        分量
+        {required && <RequiredBadge ml={4} />}
+      </FormLabel>
       <Select {...register('servings')}>
         <option value="1">1人前</option>
         <option value="2">2人前</option>

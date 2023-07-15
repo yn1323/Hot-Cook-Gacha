@@ -1,3 +1,4 @@
+import { RecipeForm } from '@/component/feature/recipe/RecipeForm'
 import { Animation } from '@/component/layout/Animation'
 import { GetSelf } from '@/page/(auth)/auth/self/route'
 import { serverFetch } from '@/page/_src/api'
@@ -15,7 +16,7 @@ const Post = async () => {
 
   return (
     <Animation>
-      <div>main</div>
+      <RecipeForm />
     </Animation>
   )
 }

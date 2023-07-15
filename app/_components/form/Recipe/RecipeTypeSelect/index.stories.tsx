@@ -11,9 +11,7 @@ import { RecipeTypeSelect } from '.'
 const meta = {
   title: 'form/Recipe/RecipeTypeSelect',
   component: RecipeTypeSelect,
-  args: {
-    disabled: false,
-  },
+  args: {},
   parameters: {},
   decorators: [
     FormProviderDecorator,

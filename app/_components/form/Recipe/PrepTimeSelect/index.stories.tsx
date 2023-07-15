@@ -11,9 +11,7 @@ import { PrepTimeSelect } from '.'
 const meta = {
   title: 'form/Recipe/PrepTimeSelect',
   component: PrepTimeSelect,
-  args: {
-    disabled: false,
-  },
+  args: {},
   parameters: {},
   decorators: [
     FormProviderDecorator,

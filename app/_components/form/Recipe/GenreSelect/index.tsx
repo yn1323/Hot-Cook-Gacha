@@ -2,18 +2,19 @@
 
 import {
   FormControl,
-  FormLabel,
   FormHelperText,
+  FormLabel,
   Select,
 } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { RequiredBadge } from '@/component/form/Recipe/RequiredBadge'
 
 type Props = {
-  disabled?: boolean
+  required?: boolean
 }
 
-export const GenreSelect = ({ disabled }: Props) => {
+export const GenreSelect = ({ required }: Props) => {
   const {
     register,
     formState: { errors },
@@ -26,7 +27,10 @@ export const GenreSelect = ({ disabled }: Props) => {
 
   return (
     <FormControl id="genre" isInvalid={!!errors.genre}>
-      <FormLabel>ジャンル</FormLabel>
+      <FormLabel>
+        ジャンル
+        {required && <RequiredBadge ml={4} />}
+      </FormLabel>
       <Select placeholder="ジャンルを選択してください" {...register('genre')}>
         <option value="homemade">家庭料理</option>
         <option value="japanese">和風</option>

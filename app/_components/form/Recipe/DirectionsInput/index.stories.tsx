@@ -12,7 +12,6 @@ const meta = {
   title: 'form/Recipe/DirectionsInput',
   component: DirectionsInput,
   args: {
-    disabled: false,
     name: 'preDirections',
   },
   parameters: {},

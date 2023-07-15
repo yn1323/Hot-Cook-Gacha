@@ -8,12 +8,13 @@ import {
 } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { RequiredBadge } from '@/component/form/Recipe/RequiredBadge'
 
 type Props = {
-  disabled?: boolean
+  required?: boolean
 }
 
-export const PrepTimeSelect = ({ disabled }: Props) => {
+export const PrepTimeSelect = ({ required }: Props) => {
   const {
     register,
     formState: { errors },
@@ -26,7 +27,10 @@ export const PrepTimeSelect = ({ disabled }: Props) => {
 
   return (
     <FormControl id="prepTime" isInvalid={!!errors.prepTime}>
-      <FormLabel>準備時間（ホットクックを除く）</FormLabel>
+      <FormLabel>
+        準備時間（ホットクックを除く）
+        {required && <RequiredBadge ml={4} />}
+      </FormLabel>
       <Select {...register('prepTime')}>
         <option value="5">5分</option>
         <option value="10">10分</option>

@@ -18,7 +18,7 @@ import {
   Textarea,
   VStack,
 } from '@chakra-ui/react'
-import { Fragment, useMemo, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { AiFillCamera } from 'react-icons/ai'
 import { FiDelete } from 'react-icons/fi'
@@ -26,15 +26,15 @@ import Resizer from 'react-image-file-resizer'
 import { z } from 'zod'
 import { recipeSchemas } from '@/constants/validations'
 import { useCustomToast } from '@/hooks/ui/useCustomToast'
+
 const AcceptImageType = ['image/png', 'image/jpeg', 'image/gif']
 const MaxImageSize = 10 // MB
 
 type Props = {
-  disabled?: boolean
   name: 'preDirections' | 'postDirections' | 'hotcookDirections'
 }
 
-export const DirectionsInput = ({ disabled, name }: Props) => {
+export const DirectionsInput = ({ name }: Props) => {
   const shape = recipeSchemas.shape[name]
   const {
     control,
@@ -48,7 +48,6 @@ export const DirectionsInput = ({ disabled, name }: Props) => {
 
   const inputRef = useRef<(HTMLInputElement | null)[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null)
   const { errorToast } = useCustomToast()
 
   watch(name)
@@ -82,7 +81,6 @@ export const DirectionsInput = ({ disabled, name }: Props) => {
   }
 
   const onDeleteImage = (index: number) => {
-    setUploadedImage(null)
     const values = getValues(name)
     setValue(
       name,
@@ -94,8 +92,12 @@ export const DirectionsInput = ({ disabled, name }: Props) => {
     }
   }
 
+  useEffect(() => {
+    fields.length === 0 && append({ direction: '', image: '' })
+  }, [fields, append])
+
   return (
-    <Fragment>
+    <Box w="100%">
       {fields.map((field, index) => (
         <Box key={field.id} pb={4}>
           <FormControl isInvalid={!!errorMessages?.[index]?.direction}>
@@ -193,7 +195,6 @@ export const DirectionsInput = ({ disabled, name }: Props) => {
                         const base64Image = await resizeFile(e.target.files[0])
                         const values = getValues(name)
 
-                        setUploadedImage(base64Image)
                         setValue(
                           name,
                           values.map((value, i) =>
@@ -262,7 +263,7 @@ export const DirectionsInput = ({ disabled, name }: Props) => {
           </FormHelperText>
         )}
       </FormControl>
-    </Fragment>
+    </Box>
   )
 }
 

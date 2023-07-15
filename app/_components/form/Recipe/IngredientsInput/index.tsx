@@ -13,16 +13,17 @@ import {
   Spacer,
   VStack,
 } from '@chakra-ui/react'
-import { Fragment, useMemo } from 'react'
+import { Fragment, useEffect, useMemo } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { z } from 'zod'
+import { RequiredBadge } from '@/component/form/Recipe/RequiredBadge'
 import { recipeSchemas } from '@/constants/validations'
 
 type Props = {
-  disabled?: boolean
+  required?: boolean
 }
 
-export const IngredientsInput = ({ disabled }: Props) => {
+export const IngredientsInput = ({ required }: Props) => {
   const {
     control,
     formState: { errors },
@@ -41,9 +42,17 @@ export const IngredientsInput = ({ disabled }: Props) => {
     name: 'ingredients',
   })
 
+  useEffect(() => {
+    fields.length === 0 &&
+      append({ ingredient: '', amount: '', mark: '', prep: '', unit: '' })
+  }, [fields, append])
+
   return (
     <FormControl id="ingredients">
-      <FormLabel>材料</FormLabel>
+      <FormLabel>
+        材料
+        {required && <RequiredBadge ml={4} />}
+      </FormLabel>
       {fields.map((field, index) => (
         <Box key={field.id} pb={4}>
           <InputGroup>
@@ -56,7 +65,6 @@ export const IngredientsInput = ({ disabled }: Props) => {
                   render={({ field }) => (
                     <Input
                       placeholder="材料を入力してください"
-                      disabled={disabled}
                       data-testid="ingredients"
                       role="textbox"
                       maxLength={64}
@@ -79,7 +87,6 @@ export const IngredientsInput = ({ disabled }: Props) => {
                     render={({ field }) => (
                       <Input
                         placeholder="量を入力してください"
-                        disabled={disabled}
                         data-testid="amount"
                         role="textbox"
                         maxLength={64}
@@ -108,6 +115,8 @@ export const IngredientsInput = ({ disabled }: Props) => {
                         <option value="mai">枚</option>
                         <option value="fukuro">袋</option>
                         <option value="can">缶</option>
+                        <option value="tableSpoon">大さじ</option>
+                        <option value="teaSpoon">小さじ</option>
                       </Select>
                     )}
                   />
@@ -137,7 +146,6 @@ export const IngredientsInput = ({ disabled }: Props) => {
                   render={({ field }) => (
                     <Input
                       placeholder="下ごしらえ、切り方など"
-                      disabled={disabled}
                       data-testid="prep"
                       role="textbox"
                       maxLength={64}
@@ -201,7 +209,6 @@ export const IngredientsInput = ({ disabled }: Props) => {
         </Box>
       ))}
       <Button
-        mt={4}
         colorScheme="green"
         onClick={() =>
           append({ ingredient: '', amount: '', mark: '', prep: '', unit: '' })
