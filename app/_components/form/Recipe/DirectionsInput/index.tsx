@@ -7,7 +7,6 @@ import {
   Flex,
   FormControl,
   FormHelperText,
-  FormLabel,
   HStack,
   Icon,
   IconButton,
@@ -15,6 +14,7 @@ import {
   InputGroup,
   Skeleton,
   Spacer,
+  Text,
   Textarea,
   VStack,
 } from '@chakra-ui/react'
@@ -32,9 +32,10 @@ const MaxImageSize = 10 // MB
 
 type Props = {
   name: 'preDirections' | 'postDirections' | 'hotcookDirections'
+  label: string
 }
 
-export const DirectionsInput = ({ name }: Props) => {
+export const DirectionsInput = ({ name, label }: Props) => {
   const shape = recipeSchemas.shape[name]
   const {
     control,
@@ -98,10 +99,12 @@ export const DirectionsInput = ({ name }: Props) => {
 
   return (
     <Box w="100%">
+      <Text pb={4} fontSize="xl">
+        {label}
+      </Text>
       {fields.map((field, index) => (
         <Box key={field.id} pb={4}>
           <FormControl isInvalid={!!errorMessages?.[index]?.direction}>
-            <FormLabel>手順{index + 1}</FormLabel>
             <InputGroup>
               <VStack w="100%">
                 <HStack w="100%">
@@ -111,7 +114,7 @@ export const DirectionsInput = ({ name }: Props) => {
                     defaultValue=""
                     render={({ field }) => (
                       <Textarea
-                        placeholder={`手順${index + 1}`}
+                        placeholder={`${label} 手順${index + 1}`}
                         data-testid="direction"
                         maxLength={500}
                         {...field}
@@ -252,7 +255,7 @@ export const DirectionsInput = ({ name }: Props) => {
         </Box>
       ))}
       {fields.length < 20 && (
-        <Button mt={4} colorScheme="green" onClick={onAppend}>
+        <Button colorScheme="green" onClick={onAppend}>
           追加
         </Button>
       )}

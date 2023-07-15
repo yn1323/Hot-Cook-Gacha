@@ -13,6 +13,7 @@ const meta = {
   component: DirectionsInput,
   args: {
     name: 'preDirections',
+    label: '準備・下ごしらえ',
   },
   parameters: {},
   decorators: [
