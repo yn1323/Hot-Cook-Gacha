@@ -14,7 +14,7 @@ export type BaseFetch = {
   response: unknown
   requestOptions?: {
     method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
-    query?: Record<string, string | number>
+    query?: Record<string, any>
     cache?: RequestInit['cache']
     next?: {
       tags?: Tags[]

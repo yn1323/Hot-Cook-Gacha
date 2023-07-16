@@ -22,7 +22,7 @@ export const Edit: StoryObj<typeof meta> = {
       genre: 'japanese',
       type: 'noodle',
       servings: '2',
-      prepTime: '10',
+      prepTime: 10,
       ingredients: [
         {
           amount: '1',

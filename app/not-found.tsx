@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { PageNotFound } from '@/component/feature/error/PageNotFound'
+import { PageNotFound } from '@/component/feature/notifications/PageNotFound'
 
 export default function RootNotFound() {
   const router = useRouter()

@@ -11,9 +11,7 @@ import { IngredientsInput } from '.'
 const meta = {
   title: 'form/Recipe/IngredientsInput',
   component: IngredientsInput,
-  args: {
-    disabled: false,
-  },
+  args: {},
   parameters: {},
   decorators: [
     FormProviderDecorator,

@@ -52,7 +52,7 @@ export const SpMenu = ({ children }: Props) => {
     const parentHeight = parentRef.current?.clientHeight ?? 0
     const childHeight = childRef.current?.clientHeight ?? 0
 
-    setSpacer(parentHeight < childHeight)
+    setSpacer(parentHeight < childHeight + LayoutStyles.Padding * 4 * 2)
   }, [pathname])
 
   return (

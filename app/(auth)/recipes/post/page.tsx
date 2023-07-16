@@ -1,4 +1,5 @@
 import { RecipeForm } from '@/component/feature/recipe/RecipeForm'
+import { recipePostFormAction } from '@/component/feature/recipe/RecipeForm/action'
 import { Animation } from '@/component/layout/Animation'
 import { GetSelf } from '@/page/(auth)/auth/self/route'
 import { serverFetch } from '@/page/_src/api'
@@ -16,7 +17,7 @@ const Post = async () => {
 
   return (
     <Animation>
-      <RecipeForm />
+      <RecipeForm onSubmit={recipePostFormAction} />
     </Animation>
   )
 }

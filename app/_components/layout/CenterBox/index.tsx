@@ -12,7 +12,7 @@ type PropTypes = {
 export const CenterBox: FC<PropTypes> = ({ children, noBorder }) => {
   const { isPC } = useScreenSize()
   return (
-    <VStack h="calc(100vh - 56px - 32px)" justifyContent="center">
+    <VStack h={'calc(100vh - 56px - 32px)'} justifyContent="center">
       {isPC ? (
         <VStack
           shadow={noBorder ? undefined : 'md'}

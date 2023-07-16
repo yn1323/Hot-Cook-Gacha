@@ -12,5 +12,5 @@ questions:
 # `{{ inputs.path }}/route.ts`
 
 ```tsx
-{{ "RouteHandler/route.tsx" | read }}
+{{ "RouteHandler/route.ts" | read }}
 ```

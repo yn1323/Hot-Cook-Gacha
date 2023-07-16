@@ -10,6 +10,8 @@ import {
   StackDivider,
 } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { DescriptionInput } from '@/component/form/Recipe/DescriptionInput'
@@ -24,31 +26,43 @@ import { StatusInput } from '@/component/form/Recipe/StatusInput'
 import { Tag } from '@/component/form/Recipe/Tag'
 import { TitleInput } from '@/component/form/Recipe/TitleInput'
 import { recipeSchemas } from '@/constants/validations'
+import { useCustomToast } from '@/hooks/ui/useCustomToast'
 
 const Schema = recipeSchemas
-type SchemaType = z.infer<typeof Schema>
+export type SchemaType = z.infer<typeof Schema>
 
 type Props = {
   defaultValues?: SchemaType
   isEdit?: boolean
+  onSubmit: (data: SchemaType) => Promise<boolean>
 }
 
-export const RecipeForm = ({ defaultValues, isEdit }: Props) => {
+export const RecipeForm = ({ defaultValues, isEdit, onSubmit }: Props) => {
+  const { errorToast } = useCustomToast()
+  const [isPending, startTransition] = useTransition()
   const methods = useForm<SchemaType>({
-    ...(defaultValues ? { defaultValues } : {}),
+    ...(defaultValues ? { defaultValues } : { isPublic: true }),
     resolver: zodResolver(Schema),
   })
+  const router = useRouter()
 
-  const { formState } = methods
-
-  const onSubmit = (data: SchemaType) => {
-    console.log(data)
+  const submitHandler = (data: SchemaType) => {
+    startTransition(async () => {
+      const result = await onSubmit(data)
+      if (result) {
+        router.push('/recipes/complete')
+      } else {
+        errorToast({
+          title: 'レシピの投稿に失敗しました。',
+        })
+      }
+    })
   }
 
   return (
     <VStack w="100%" gap={4}>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={methods.handleSubmit(submitHandler)}>
           <VStack w="100%" spacing={6}>
             <Card w="100%">
               <CardHeader fontSize="2xl">1. 基本情報</CardHeader>
@@ -103,7 +117,12 @@ export const RecipeForm = ({ defaultValues, isEdit }: Props) => {
           </VStack>
 
           <Box textAlign="right" w="100%" mt={6}>
-            <Button colorScheme="green" size="lg" type="submit">
+            <Button
+              colorScheme="green"
+              size="lg"
+              type="submit"
+              isLoading={isPending}
+            >
               {isEdit ? 'レシピを更新する' : 'レシピを投稿する'}
             </Button>
           </Box>

@@ -18,10 +18,10 @@ const meta = {
   decorators: [
     FormProviderDecorator,
     (_, { args }) => {
-      const Schema = z.object({ status: recipeSchemas.shape.status })
+      const Schema = z.object({ isPublic: recipeSchemas.shape.isPublic })
       type SchemaType = z.infer<typeof Schema>
       const methods = useForm<SchemaType>({
-        defaultValues: { status: 'private' },
+        defaultValues: { isPublic: true },
         resolver: zodResolver(Schema),
       })
       const onSubmit: SubmitHandler<SchemaType> = data => {}

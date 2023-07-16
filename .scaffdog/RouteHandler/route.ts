@@ -6,7 +6,7 @@ type {{ inputs.component | camel }}Document = {
   uid: string
 }
 
-export type Get{{ inputs.component | camel }} = BaseFetch & {
+export type Get{{ inputs.component | pascal }} = BaseFetch & {
   response: {
     user: {{ inputs.component | camel }}Document & {
       dateCreated: Date
@@ -21,7 +21,7 @@ export type Get{{ inputs.component | camel }} = BaseFetch & {
 }
 export const GET = async (
   _: NextRequest,
-  { params: { userId } }: { params: Get{{ inputs.component | camel }}['requestOptions']['query'] }
+  { params: { userId } }: { params: Get{{ inputs.component | pascal }}['requestOptions']['query'] }
 ) => {
   const res = await serverCollection
     .doc('account')
@@ -44,14 +44,14 @@ export const GET = async (
   })
 }
 
-export type Post{{ inputs.component | camel }} = BaseFetch & {
+export type Post{{ inputs.component | pascal }} = BaseFetch & {
   response: {}
   requestOptions: {
     query: {{ inputs.component | camel }}Document
   }
 }
 export const POST = async (request: NextRequest) => {
-  const { uid, name, picture }: Post{{ inputs.component | camel }}['requestOptions']['query'] =
+  const { uid, name, picture }: Post{{ inputs.component | pascal }}['requestOptions']['query'] =
     await request.json()
 
   const res = await serverCollection

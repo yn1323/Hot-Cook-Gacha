@@ -79,6 +79,6 @@ export const recipeSchemas = z.object({
     )
     .max(20, '20ステップ以内で入力してください。'),
 
-  status: z.enum(['draft', 'public', 'private']), // 公開・非公開
+  isPublic: z.boolean(), // 公開・非公開
   tags: z.array(z.string()).max(5, 'タグは5個以内にしてください。').optional(), // 任意のタグ
 })

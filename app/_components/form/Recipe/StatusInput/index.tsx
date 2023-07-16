@@ -12,7 +12,7 @@ import { useFormContext } from 'react-hook-form'
 type Props = {}
 
 export const StatusInput = ({}: Props) => {
-  const { setValue, getValues, watch } = useFormContext<{ status: string }>()
+  const { getValues, register } = useFormContext<{ isPublic: boolean }>()
 
   return (
     <FormControl id="status">
@@ -21,14 +21,7 @@ export const StatusInput = ({}: Props) => {
           レシピを公開する
         </FormLabel>
         <InputGroup>
-          <Checkbox
-            data-testid="status"
-            onChange={e => {
-              setValue('status', e.target.checked ? 'public' : 'private')
-            }}
-            checked={getValues('status') === 'public'}
-            defaultChecked={getValues('status') === 'public'}
-          />
+          <Checkbox data-testid="status" {...register('isPublic')} />
         </InputGroup>
       </HStack>
     </FormControl>
