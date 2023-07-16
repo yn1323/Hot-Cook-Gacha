@@ -41,8 +41,6 @@ export const RecipeForm = ({ defaultValues, isEdit }: Props) => {
 
   const { formState } = methods
 
-  console.log(formState)
-
   const onSubmit = (data: SchemaType) => {
     console.log(data)
   }
