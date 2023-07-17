@@ -66,8 +66,8 @@ export const GET = async (request: NextRequest) => {
     const data = doc.data()
     return {
       ...data,
-      dateCreated: data.dateCreated.toDate(),
-      dateUpdated: data.dateUpdate.toDate(),
+      dateCreated: new Date(data.dateCreated),
+      dateUpdated: new Date(data.dateUpdate),
     }
   })
 

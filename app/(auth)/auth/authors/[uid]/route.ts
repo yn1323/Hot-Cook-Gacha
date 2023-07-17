@@ -2,41 +2,36 @@ import { NextRequest, NextResponse } from 'next/server'
 import { serverCollection } from '@/firebase/server'
 import { BaseFetch } from '@/page/_src/api'
 
-export type Author = {
+type Author = {
   name: string
   id: string
+  picture?: string
 }
 
-export type GetAuthors = BaseFetch & {
+export type GetAuthor = BaseFetch & {
   response: {
-    authors: Author[]
+    author: Author
   }
   requestOptions: {
     query: {
-      authorIds: string
+      uid: string
     }
   }
 }
 
-export const GET = async (request: NextRequest) => {
-  const params = request.nextUrl.searchParams
-  const authors = params.get('authorIds')
-
-  if (!authors) {
-    return NextResponse.json({ authors: [] })
-  }
-
-  const authorIds = authors.split(',')
-
+export const GET = async (
+  _: NextRequest,
+  { params: { uid } }: { params: { uid: string } }
+) => {
   const res = await serverCollection
     .doc('account')
     .collection('users')
-    .where('uid', 'in', authorIds)
+    .where('uid', '==', uid)
     .get()
     .catch(e => console.log(e))
 
   if (!res) {
-    return NextResponse.json({ authors: [] })
+    return NextResponse.json({ author: [] })
   }
 
   const authorData = res.docs.map(doc => {
@@ -44,10 +39,11 @@ export const GET = async (request: NextRequest) => {
     return {
       name: d.name,
       id: d.uid,
+      picture: d.picture,
     }
   })
 
   return NextResponse.json({
-    authors: authorData,
+    author: authorData[0],
   })
 }

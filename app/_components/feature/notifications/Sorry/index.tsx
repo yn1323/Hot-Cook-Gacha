@@ -11,14 +11,14 @@ export const Sorry = () => {
   return (
     <Animation>
       <CenterBox noBorder>
-        <Image src={shockedImage} alt="" />
+        <Image src={shockedImage} alt="" width={300} />
         <h2>ページを表示できませんでした。</h2>
         <p style={{ width: 'max-content' }}>
-          しばらく経ってから試すか、下のボタンからリトライしてください。
+          しばらく経ってから再度試してください。
         </p>
         <Link href={window.location.href}>
           <Button colorScheme="green" mt={4}>
-            リトライ
+            戻る
           </Button>
         </Link>
       </CenterBox>

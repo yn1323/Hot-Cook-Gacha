@@ -16,6 +16,7 @@ type Comment = {
 export type GetRecipe = BaseFetch & {
   response: {
     recipe: z.infer<typeof recipeSchemas> & {
+      recipeId: string
       dateCreated: Date
       dateUpdate: Date
       version: number
@@ -52,8 +53,8 @@ export const GET = async (
   return NextResponse.json({
     recipe: {
       ...recipe,
-      dateCreated: recipe.dateCreated.toDate(),
-      dateUpdated: recipe.dateUpdate.toDate(),
+      dateCreated: new Date(recipe.dateCreated),
+      dateUpdated: new Date(recipe.dateUpdate),
     },
   })
 }

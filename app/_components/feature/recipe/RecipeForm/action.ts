@@ -8,6 +8,20 @@ import { serverFetch } from '@/page/_src/api'
 export async function recipePostFormAction(schema: SchemaType) {
   const id = serverCollection.doc().id
 
+  const fixedSchema = {
+    ...schema,
+    preDirections: schema.preDirections.filter(
+      ({ direction, image }) => direction || image
+    ),
+    hotcookDirections: schema.hotcookDirections.filter(
+      ({ direction, image }) => direction || image
+    ),
+
+    postDirections: schema.postDirections.filter(
+      ({ direction, image }) => direction || image
+    ),
+  }
+
   const result = await serverFetch<PostRecipe>(`/recipes/api/${id}`, {
     method: 'POST',
     query: schema,
