@@ -1,13 +1,17 @@
 import { NotFound } from '@/component/feature/notifications/NotFound'
-import { RecipeSearchForm } from '@/component/feature/recipe/RecipeSearchForm'
 import {
   SearchQueryParams,
   recipeSearchFormAction,
 } from '@/component/feature/recipe/RecipeSearchForm/action'
 import { Animation } from '@/component/layout/Animation'
+import SearchForm from '@/page/(auth)/recipes/search/form'
 
-const Search = async ({ params }: { params: SearchQueryParams }) => {
-  const recipes = await recipeSearchFormAction(params)
+const Search = async ({
+  searchParams,
+}: {
+  searchParams: SearchQueryParams
+}) => {
+  const recipes = await recipeSearchFormAction(searchParams)
 
   if (!recipes) {
     return (
@@ -19,7 +23,7 @@ const Search = async ({ params }: { params: SearchQueryParams }) => {
 
   return (
     <Animation>
-      <RecipeSearchForm orderParams={params.orderBy} />
+      <SearchForm authors={[]} recipes={recipes} />
     </Animation>
   )
 }

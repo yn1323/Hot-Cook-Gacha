@@ -46,20 +46,30 @@ export const GET = async (request: NextRequest) => {
     startAt: params.get('startAt') || '',
   }
 
-  const res = await serverCollection
+  let collection = serverCollection
     .doc('search')
     .collection('recipes')
     .where('isPublic', '==', true)
     .orderBy(query.orderBy)
     .limit(query.limit)
-    .startAt(query.startAt)
-    .get()
-    .catch(e => console.log(e))
+
+  if (query.startAt) {
+    collection.startAt(query.startAt)
+  }
+
+  const res = await collection.get().catch(e => console.log(e))
 
   if (!res || res.docs.length === 0) {
     return { recipes: [] }
   }
-  const recipes = res.docs.map(doc => doc.data())
+  const recipes = res.docs.map(doc => {
+    const data = doc.data()
+    return {
+      ...data,
+      dateCreated: data.dateCreated.toDate(),
+      dateUpdated: data.dateUpdate.toDate(),
+    }
+  })
 
   return NextResponse.json({
     recipes,

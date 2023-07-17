@@ -12,36 +12,36 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useMemo, useState, useTransition } from 'react'
-import { SearchQueryParams } from '@/component/feature/recipe/RecipeSearchForm/action'
 
 const OrderParams = [
   { label: '掲載日', value: 'dateCreated' },
   { label: 'レシピID', value: 'recipeId' },
 ] as const
 
-type Props = {
-  orderParams?: SearchQueryParams['oderBy']
-}
+type Props = {}
 
-export const RecipeSearchForm = ({ orderParams }: Props) => {
+export const RecipeSearchForm = ({}: Props) => {
   const router = useRouter()
-  const [order, setOrder] = useState(orderParams)
+  const params = useSearchParams()
+  const orderParam = params.get('orderBy')
+
+  const [order, setOrder] = useState(params.get('orderBy'))
   const [isPending, startTransition] = useTransition()
 
   const orderContentLabel = useMemo(() => {
     let label = 'なし'
-    if (orderParams === 'dateCreated') {
+    if (orderParam === 'dateCreated') {
       label = '掲載日'
-    } else if (orderParams === 'recipeId') {
+    } else if (orderParam === 'recipeId') {
       label = 'レシピID'
     }
     return label
-  }, [orderParams])
+  }, [orderParam])
 
   return (
-    <Accordion allowToggle>
+    <Accordion allowToggle w="100%">
       <AccordionItem>
         <h2>
           <AccordionButton>

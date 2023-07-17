@@ -52,6 +52,8 @@ export const GET = async (
   return NextResponse.json({
     recipe: {
       ...recipe,
+      dateCreated: recipe.dateCreated.toDate(),
+      dateUpdated: recipe.dateUpdate.toDate(),
     },
   })
 }
