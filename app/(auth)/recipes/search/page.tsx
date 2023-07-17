@@ -11,7 +11,7 @@ const Search = async ({
 }: {
   searchParams: SearchQueryParams
 }) => {
-  const recipes = await recipeSearchFormAction(searchParams)
+  const { recipes, authors } = await recipeSearchFormAction(searchParams)
 
   if (!recipes) {
     return (
@@ -23,7 +23,7 @@ const Search = async ({
 
   return (
     <Animation>
-      <SearchForm authors={[]} recipes={recipes} />
+      <SearchForm authors={authors} recipes={recipes} />
     </Animation>
   )
 }
