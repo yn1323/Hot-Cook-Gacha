@@ -15,13 +15,13 @@ export const StatusInput = ({}: Props) => {
   const { getValues, register } = useFormContext<{ isPublic: boolean }>()
 
   return (
-    <FormControl id="status">
+    <FormControl id="isPublic">
       <HStack alignItems="center">
         <FormLabel w={200} m={0} _hover={{ cursor: 'pointer' }}>
           レシピを公開する
         </FormLabel>
         <InputGroup>
-          <Checkbox data-testid="status" {...register('isPublic')} />
+          <Checkbox data-testid="isPublic" {...register('isPublic')} />
         </InputGroup>
       </HStack>
     </FormControl>

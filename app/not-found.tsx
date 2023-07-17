@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { PageNotFound } from '@/component/feature/notifications/PageNotFound'
+import { NotFound } from '@/component/feature/notifications/NotFound'
 
 export default function RootNotFound() {
   const router = useRouter()
@@ -13,7 +13,7 @@ export default function RootNotFound() {
   }, [router])
   return (
     <main>
-      <PageNotFound />
+      <NotFound />
     </main>
   )
 }

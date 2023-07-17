@@ -1,6 +1,9 @@
 {
-  "extends": ["development"],
+  "extends": [
+    "development"
+  ],
   "hints": {
-    "axe/forms": "off"
+    "axe/forms": "off",
+    "no-inline-styles": "off"
   }
 }

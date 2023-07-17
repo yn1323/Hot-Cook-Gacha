@@ -41,7 +41,9 @@ export const RecipeForm = ({ defaultValues, isEdit, onSubmit }: Props) => {
   const { errorToast } = useCustomToast()
   const [isPending, startTransition] = useTransition()
   const methods = useForm<SchemaType>({
-    ...(defaultValues ? { defaultValues } : { isPublic: true }),
+    ...(defaultValues
+      ? { defaultValues }
+      : { defaultValues: { isPublic: true } }),
     resolver: zodResolver(Schema),
   })
   const router = useRouter()

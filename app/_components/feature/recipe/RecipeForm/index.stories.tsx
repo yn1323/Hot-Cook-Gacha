@@ -5,7 +5,11 @@ import { RecipeForm } from '.'
 const meta = {
   title: 'feature/recipe/RecipeForm',
   component: RecipeForm,
-  args: {},
+  args: {
+    onSubmit: async function onSubmit() {
+      return true
+    },
+  },
   parameters: {},
   decorators: [FormProviderDecorator],
 } satisfies Meta<typeof RecipeForm>
@@ -55,7 +59,7 @@ export const Edit: StoryObj<typeof meta> = {
         },
       ],
       postDirections: [],
-      status: 'public',
+      isPublic: true,
       tags: ['朝食', 'ランチ', '簡単'],
     },
   },

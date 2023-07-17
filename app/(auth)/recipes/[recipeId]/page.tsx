@@ -1,4 +1,4 @@
-import { PageNotFound } from '@/component/feature/notifications/PageNotFound'
+import { NotFound } from '@/component/feature/notifications/NotFound'
 import { Animation } from '@/component/layout/Animation'
 import { GetRecipe } from '@/page/(auth)/recipes/api/[recipeId]/route'
 import { serverFetch } from '@/page/_src/api'
@@ -16,7 +16,7 @@ const Recipe = async ({
 }) => {
   const recipe = await initialize(recipeId)
   if (!recipe) {
-    return <PageNotFound />
+    return <NotFound />
   }
 
   return <Animation>Recipe Found!</Animation>

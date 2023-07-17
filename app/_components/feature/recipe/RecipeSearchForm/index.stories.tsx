@@ -1,14 +1,13 @@
 import { type Meta, type StoryObj } from '@storybook/react'
 import { FormProviderDecorator } from '@/config/Decorators'
-import { PageNotFound } from '.'
+import { RecipeSearchForm } from '.'
 
 const meta = {
-  title: 'feature/error/PageNotFound',
-  component: PageNotFound,
+  title: 'feature/recipe/RecipeSearchForm',
+  component: RecipeSearchForm,
   args: {},
-  parameters: {},
   decorators: [FormProviderDecorator],
-} satisfies Meta<typeof PageNotFound>
+} satisfies Meta<typeof RecipeSearchForm>
 export default meta
 
 export const Basic: StoryObj<typeof meta> = {}
