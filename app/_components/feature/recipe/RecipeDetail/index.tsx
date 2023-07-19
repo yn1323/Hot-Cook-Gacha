@@ -11,7 +11,6 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { format } from 'date-fns'
 import { Fragment } from 'react'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { MdFavorite } from 'react-icons/md'
@@ -23,6 +22,7 @@ import {
   UnitOptions,
 } from '@/constants/recipes'
 import { GetRecipe } from '@/page/(auth)/recipes/api/[recipeId]/route'
+import { firebaseDateToStr } from '@/page/_src/helpers/date'
 
 type Props = {
   recipe: GetRecipe['response']['recipe'] & {
@@ -256,7 +256,7 @@ export const RecipeDetail = ({ recipe }: Props) => {
       )}
 
       <Text w="100%" textAlign="right">
-        作成日：{format(new Date(recipe.dateCreated), 'yyyy年MM月dd日')}
+        作成日：{firebaseDateToStr(recipe.dateCreated, 'yyyy年MM月dd日')}
       </Text>
     </VStack>
   )

@@ -17,8 +17,8 @@ export type GetRecipe = BaseFetch & {
   response: {
     recipe: z.infer<typeof recipeSchemas> & {
       recipeId: string
-      dateCreated: Date
-      dateUpdate: Date
+      dateCreated: string
+      dateUpdate: string
       version: number
       author: string
       comment: Comment[]
