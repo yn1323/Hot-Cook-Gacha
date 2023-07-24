@@ -22,7 +22,7 @@ import {
   UnitOptions,
 } from '@/constants/recipes'
 import { GetRecipe } from '@/page/(auth)/recipes/api/[recipeId]/route'
-import { firebaseDateToStr } from '@/page/_src/helpers/date'
+import { firebaseDateToStr } from '@/helpers/date'
 
 type Props = {
   recipe: GetRecipe['response']['recipe'] & {
