@@ -41,7 +41,7 @@
     "@storybook/test-runner": "^0.11.0",
     "@storybook/testing-library": "^0.2.0",
     "@types/node": "20.4.5",
-    "@types/react": "18.2.15",
+    "@types/react": "18.2.17",
     "@types/react-dom": "18.2.7",
     "chromatic": "^6.18.2",
     "encoding": "^0.1.13",
