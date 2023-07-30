@@ -1,6 +1,6 @@
 'use client'
 
-import { NotFound } from '@/component/feature/notifications/NotFound'
+// import { NotFound } from '@/component/feature/notifications/NotFound'
 
 export default function RootNotFound() {
   // const router = useRouter()
@@ -11,7 +11,9 @@ export default function RootNotFound() {
   // }, [router])
   return (
     <main>
-      <NotFound />
+      {/* なぜかコンポーネントをimportするとbuildエラーになる */}
+      Not Found
+      {/* <NotFound /> */}
     </main>
   )
 }

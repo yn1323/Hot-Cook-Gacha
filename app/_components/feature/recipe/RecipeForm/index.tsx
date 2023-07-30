@@ -43,7 +43,18 @@ export const RecipeForm = ({ defaultValues, isEdit, onSubmit }: Props) => {
   const methods = useForm<SchemaType>({
     ...(defaultValues
       ? { defaultValues }
-      : { defaultValues: { isPublic: true } }),
+      : {
+          defaultValues: {
+            isPublic: true,
+            // 要素追加でフォーカスが外れ、スクロールされた状態になるのを防ぐ
+            postDirections: [
+              {
+                direction: '',
+                image: '',
+              },
+            ],
+          },
+        }),
     resolver: zodResolver(Schema),
   })
   const router = useRouter()

@@ -146,11 +146,18 @@ export const RecipeDetail = ({ recipe }: Props) => {
           {recipe.ingredients.map((ingredient, index) => (
             <VStack w="100%" key={index}>
               <HStack w="100%" justifyContent="space-between">
-                <Text textAlign="right" w="60%" noOfLines={5} fontSize="sm">
-                  {ingredient.mark}
-                  {ingredient.ingredient}
-                </Text>
-                <Text w="40%" noOfLines={5} textAlign="right" fontSize="sm">
+                <Box w="60%">
+                  <Text textAlign="right" noOfLines={5} fontSize="sm">
+                    {ingredient.mark}
+                    {ingredient.ingredient}
+                  </Text>
+                  {ingredient.prep && (
+                    <Text textAlign="right" fontSize="sm">
+                      ({ingredient.prep})
+                    </Text>
+                  )}
+                </Box>
+                <Text w="40%" noOfLines={5} textAlign="center" fontSize="sm">
                   {ingredient.amount}{' '}
                   {UnitOptions.find(({ value }) => value === ingredient.unit)
                     ?.label === '単位なし'
@@ -159,11 +166,6 @@ export const RecipeDetail = ({ recipe }: Props) => {
                         ?.label ?? ''}
                 </Text>
               </HStack>
-              {ingredient.prep && (
-                <Text w="100%" textAlign="right" fontSize="sm">
-                  {ingredient.prep}
-                </Text>
-              )}
             </VStack>
           ))}
         </VStack>

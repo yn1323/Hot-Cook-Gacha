@@ -17,7 +17,7 @@ export const StatusInput = ({}: Props) => {
   return (
     <FormControl id="isPublic">
       <HStack alignItems="center">
-        <FormLabel w={200} m={0} _hover={{ cursor: 'pointer' }}>
+        <FormLabel w={240} m={0} _hover={{ cursor: 'pointer' }}>
           レシピを公開する
         </FormLabel>
         <InputGroup>
