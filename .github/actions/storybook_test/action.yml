@@ -1,49 +1,55 @@
 inputs:
   GCP_PROJECT_ID:
-    description: "GCP_PROJECT_ID"
+    description: 'GCP_PROJECT_ID'
     required: true
   GCP_CLIENT_EMAIL:
-    description: "GCP_CLIENT_EMAIL"
+    description: 'GCP_CLIENT_EMAIL'
     required: true
   GCP_PRIVATE_KEY:
-    description: "GCP_PRIVATE_KEY"
+    description: 'GCP_PRIVATE_KEY'
     required: true
   GCP_PRIVATE_KEY_ID:
-    description: "GCP_PRIVATE_KEY_ID"
+    description: 'GCP_PRIVATE_KEY_ID'
     required: true
   X_API_KEY:
-    description: "X_API_KEY"
+    description: 'X_API_KEY'
     required: true
   NEXT_PUBLIC_FIREBASE_API_KEY:
-    description: "NEXT_PUBLIC_FIREBASE_API_KEY"
+    description: 'NEXT_PUBLIC_FIREBASE_API_KEY'
     required: true
   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:
-    description: "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN"
+    description: 'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN'
     required: true
   NEXT_PUBLIC_FIREBASE_PROJECT_ID:
-    description: "NEXT_PUBLIC_FIREBASE_PROJECT_ID"
+    description: 'NEXT_PUBLIC_FIREBASE_PROJECT_ID'
     required: true
   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET:
-    description: "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET"
+    description: 'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET'
     required: true
   NEXT_PUBLIC_FIREBASE_APP_ID:
-    description: "NEXT_PUBLIC_FIREBASE_APP_ID"
+    description: 'NEXT_PUBLIC_FIREBASE_APP_ID'
     required: true
   DEV_FIRESTORE_COLLECTION:
-    description: "DEV_FIRESTORE_COLLECTION"
+    description: 'DEV_FIRESTORE_COLLECTION'
+    required: true
+  SUPABASE_URL:
+    description: 'SUPABASE_URL'
+    required: true
+  SUPABASE_API_KEY:
+    description: 'SUPABASE_API_KEY'
     required: true
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Use Node.js v18
       uses: actions/setup-node@v3
       with:
-        node-version: "18.x"
+        node-version: '18.x'
     - name: Install dependencies
       run: npm ci
       shell: bash
-    - name: "Create env file"
+    - name: 'Create env file'
       shell: bash
       run: |
         touch .env

@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js v18
         uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
+          node-version: '18.x'
       - name: StorybookTest
         uses: ./.github/actions/storybook_test
         with:
@@ -28,3 +28,5 @@ jobs:
           NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
           NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
           DEV_FIRESTORE_COLLECTION: ${{ secrets.DEV_FIRESTORE_COLLECTION }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
