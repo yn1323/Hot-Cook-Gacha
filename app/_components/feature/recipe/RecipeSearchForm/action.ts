@@ -11,6 +11,9 @@ export async function recipeSearchFormAction(params: SearchQueryParams) {
     query: {
       ...params,
     },
+    next: {
+      tags: ['recipe'],
+    },
   })
 
   const authorIds = recipes.map(recipe => recipe.author)

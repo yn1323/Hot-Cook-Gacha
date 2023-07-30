@@ -17,7 +17,7 @@ const Post = async () => {
 
   return (
     <Animation>
-      <RecipeForm onSubmit={recipePostFormAction} />
+      <RecipeForm onCreate={recipePostFormAction} />
     </Animation>
   )
 }

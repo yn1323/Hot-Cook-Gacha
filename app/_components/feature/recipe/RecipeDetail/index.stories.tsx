@@ -59,3 +59,9 @@ const meta = {
 export default meta
 
 export const Basic: StoryObj<typeof meta> = {}
+
+export const Editable: StoryObj<typeof meta> = {
+  args: {
+    isEditable: true,
+  },
+}

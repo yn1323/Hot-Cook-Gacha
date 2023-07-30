@@ -1,5 +1,9 @@
 import { NotFound } from '@/component/feature/notifications/NotFound'
-import { RecipeDetail } from '@/component/feature/recipe/RecipeDetail'
+import { RecipeForm, SchemaType } from '@/component/feature/recipe/RecipeForm'
+import {
+  recipeDeleteFormAction,
+  recipePutFormAction,
+} from '@/component/feature/recipe/RecipeForm/action'
 import { Animation } from '@/component/layout/Animation'
 import { GetAuthor } from '@/page/(auth)/auth/authors/[uid]/route'
 import { GetRecipe } from '@/page/(auth)/recipes/api/[recipeId]/route'
@@ -8,14 +12,17 @@ import { serverFetch } from '@/page/_src/api'
 
 async function initialize(recipeId: string) {
   const { user } = await serverFetch<GetUser>('/auth/self')
+
+  if (!user) {
+    return null
+  }
+
   const { recipe } = await serverFetch<GetRecipe>(`/recipes/api/${recipeId}`, {
     query: {},
-    next: {
-      tags: ['recipe'],
-    },
+    cache: 'no-cache',
   })
 
-  if (!recipe) {
+  if (user.uid !== recipe.author) {
     return null
   }
 
@@ -25,13 +32,12 @@ async function initialize(recipeId: string) {
 
   return {
     ...recipe,
-    isEditable: user?.uid === recipe.author,
     authorName: author?.name ?? '',
     authorPicture: author?.picture ?? '',
   }
 }
 
-const Recipe = async ({
+const RecipeEdit = async ({
   params: { recipeId },
 }: {
   params: { recipeId: string }
@@ -42,11 +48,21 @@ const Recipe = async ({
     return <NotFound />
   }
 
+  const onSubmit = async (data: SchemaType) => {
+    return true
+  }
+
   return (
     <Animation>
-      <RecipeDetail recipe={recipe} isEditable={recipe.isEditable} />
+      <RecipeForm
+        defaultValues={recipe}
+        onUpdate={recipePutFormAction}
+        onDelete={recipeDeleteFormAction}
+        recipeId={recipe.recipeId}
+        isEdit
+      />
     </Animation>
   )
 }
 
-export default Recipe
+export default RecipeEdit

@@ -61,7 +61,11 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ recipes: [] })
   }
 
-  let collection = serverCollection.doc('search').collection('recipes')
+  let collection:
+    | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
+    | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = serverCollection
+    .doc('search')
+    .collection('recipes')
 
   if (query.myRecipeOnly) {
     const auth = getServerAuth()
@@ -72,17 +76,18 @@ export const GET = async (request: NextRequest) => {
       return NextResponse.json({ recipes: [] })
     }
 
-    collection
+    collection = collection
       .where('author', '==', user.uid)
       .orderBy(query.orderBy)
       .limit(query.limit)
   } else if (query.author) {
-    collection
+    collection = collection
+      .where('isPublic', '==', true)
       .where('author', '==', query.author)
       .orderBy(query.orderBy)
       .limit(query.limit)
   } else {
-    collection
+    collection = collection
       .where('isPublic', '==', true)
       .orderBy(query.orderBy)
       .limit(query.limit)
@@ -99,6 +104,7 @@ export const GET = async (request: NextRequest) => {
   }
   const recipes = res.docs.map(doc => {
     const data = doc.data()
+    console.log(data.title)
     return {
       ...data,
       dateCreated: data.dateCreated.toDate(),

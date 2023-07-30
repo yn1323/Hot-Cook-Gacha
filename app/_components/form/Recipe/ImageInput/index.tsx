@@ -32,7 +32,13 @@ export const ImageInput = ({ url = '', label }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [uploadedImage, setUploadedImage] = useState<string | null>(null)
   const { errorToast } = useCustomToast()
-  const { register, setValue } = useFormContext<{ image: string }>()
+  const { register, setValue, getValues, watch } = useFormContext<{
+    image: string
+  }>()
+
+  watch('image')
+
+  const initialImage = getValues('image')
 
   const onClickButton = () => {
     inputRef.current?.click()
@@ -51,13 +57,14 @@ export const ImageInput = ({ url = '', label }: Props) => {
       <FormLabel>{label}</FormLabel>
       <InputGroup>
         <HStack justifyContent={'space-around'} w="100%">
-          {uploadedImage || url ? (
+          {uploadedImage || initialImage ? (
             <Box position="relative" w="100%">
               <Image
-                src={uploadedImage ?? url}
+                src={uploadedImage ?? initialImage}
                 alt={label}
                 w="100%"
-                h="100%"
+                h={200}
+                objectFit="contain"
                 onClick={() => onClickButton()}
               />
               <IconButton

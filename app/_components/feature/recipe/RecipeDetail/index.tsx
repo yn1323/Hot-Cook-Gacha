@@ -11,11 +11,13 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
 import { Fragment } from 'react'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { MdFavorite } from 'react-icons/md'
 import {
   GenreOptions,
+  MarkOptions,
   PrepTimeOptions,
   RecipeTypeOptions,
   ServingOptions,
@@ -30,9 +32,11 @@ type Props = {
     authorName: string
     authorPicture?: string
   }
+  isEditable?: boolean
 }
 
-export const RecipeDetail = ({ recipe }: Props) => {
+export const RecipeDetail = ({ recipe, isEditable = false }: Props) => {
+  const router = useRouter()
   return (
     <VStack w="100%" gap={5}>
       <Text
@@ -45,9 +49,27 @@ export const RecipeDetail = ({ recipe }: Props) => {
       >
         {recipe.title}
       </Text>
+      {isEditable && (
+        <Box textAlign="right" w="100%">
+          <Button
+            colorScheme="green"
+            onClick={() => {
+              router.push(`/recipes/${recipe.recipeId}/edit`)
+            }}
+          >
+            編集する
+          </Button>
+        </Box>
+      )}
       {recipe.image ? (
         <Center h={72} w="100%">
-          <Image src={recipe.image} alt="recipe" />
+          <Image
+            src={recipe.image}
+            alt="recipe"
+            w="100%"
+            h={200}
+            objectFit="contain"
+          />
         </Center>
       ) : (
         <Box h={72} w="100%">
@@ -148,7 +170,8 @@ export const RecipeDetail = ({ recipe }: Props) => {
               <HStack w="100%" justifyContent="space-between">
                 <Box w="60%">
                   <Text textAlign="right" noOfLines={5} fontSize="sm">
-                    {ingredient.mark}
+                    {MarkOptions.find(({ value }) => value === ingredient.mark)
+                      ?.label ?? ''}
                     {ingredient.ingredient}
                   </Text>
                   {ingredient.prep && (

@@ -14,6 +14,11 @@ import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
+import {
+  recipeDeleteFormAction,
+  recipePostFormAction,
+  recipePutFormAction,
+} from '@/component/feature/recipe/RecipeForm/action'
 import { DescriptionInput } from '@/component/form/Recipe/DescriptionInput'
 import { DirectionsInput } from '@/component/form/Recipe/DirectionsInput'
 import { GenreSelect } from '@/component/form/Recipe/GenreSelect'
@@ -34,11 +39,21 @@ export type SchemaType = z.infer<typeof Schema>
 type Props = {
   defaultValues?: SchemaType
   isEdit?: boolean
-  onSubmit: (data: SchemaType) => Promise<boolean>
+  recipeId?: string
+  onCreate?: typeof recipePostFormAction
+  onUpdate?: typeof recipePutFormAction
+  onDelete?: typeof recipeDeleteFormAction
 }
 
-export const RecipeForm = ({ defaultValues, isEdit, onSubmit }: Props) => {
-  const { errorToast } = useCustomToast()
+export const RecipeForm = ({
+  defaultValues,
+  isEdit,
+  recipeId,
+  onCreate,
+  onUpdate,
+  onDelete,
+}: Props) => {
+  const { errorToast, successToast } = useCustomToast()
   const [isPending, startTransition] = useTransition()
   const methods = useForm<SchemaType>({
     ...(defaultValues
@@ -61,15 +76,30 @@ export const RecipeForm = ({ defaultValues, isEdit, onSubmit }: Props) => {
 
   const submitHandler = (data: SchemaType) => {
     startTransition(async () => {
-      const result = await onSubmit(data)
+      const result = isEdit
+        ? onUpdate && (await onUpdate(data, recipeId ?? ''))
+        : onCreate && (await onCreate(data))
+
       if (result) {
-        router.push('/recipes/complete')
+        if (isEdit) {
+          successToast({
+            title: 'レシピの更新が完了しました。',
+          })
+          router.push(`/recipes/${recipeId}`)
+        } else {
+          router.push('/recipes/complete')
+        }
       } else {
         errorToast({
           title: 'レシピの投稿に失敗しました。',
         })
       }
     })
+  }
+
+  const deleteHandler = () => {
+    if (!onDelete) return
+    startTransition(async () => {})
   }
 
   return (

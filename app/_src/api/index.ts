@@ -1,7 +1,7 @@
 import process from 'process'
 import { RequestInit } from 'next/dist/server/web/spec-extension/request'
 import { cookies, headers } from 'next/headers'
-import { Tags } from '@/page/_src/api/tags'
+import { RevalidateTagType } from '@/page/_src/api/tags'
 import { getCookie } from '@/page/_src/client'
 
 export const makePath = (path: string) => {
@@ -17,7 +17,7 @@ export type BaseFetch = {
     query?: Record<string, any>
     cache?: RequestInit['cache']
     next?: {
-      tags?: Tags[]
+      tags?: RevalidateTagType[]
       revalidate?: NextFetchRequestConfig['revalidate']
     }
   }
