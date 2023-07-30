@@ -2,12 +2,14 @@
 
 import { VStack } from '@chakra-ui/layout'
 import {
-  Box,
   Button,
   Card,
   CardBody,
   CardHeader,
+  HStack,
+  Spacer,
   StackDivider,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
@@ -19,6 +21,7 @@ import {
   recipePostFormAction,
   recipePutFormAction,
 } from '@/component/feature/recipe/RecipeForm/action'
+import { DeleteModal } from '@/component/feature/recipe/RecipeForm/DeleteModal'
 import { DescriptionInput } from '@/component/form/Recipe/DescriptionInput'
 import { DirectionsInput } from '@/component/form/Recipe/DirectionsInput'
 import { GenreSelect } from '@/component/form/Recipe/GenreSelect'
@@ -53,11 +56,22 @@ export const RecipeForm = ({
   onUpdate,
   onDelete,
 }: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const { errorToast, successToast } = useCustomToast()
   const [isPending, startTransition] = useTransition()
   const methods = useForm<SchemaType>({
     ...(defaultValues
-      ? { defaultValues }
+      ? {
+          defaultValues: {
+            ...defaultValues,
+            postDirections: [
+              ...(defaultValues.postDirections ?? {
+                direction: '',
+                image: '',
+              }),
+            ],
+          },
+        }
       : {
           defaultValues: {
             isPublic: true,
@@ -99,7 +113,19 @@ export const RecipeForm = ({
 
   const deleteHandler = () => {
     if (!onDelete) return
-    startTransition(async () => {})
+    startTransition(async () => {
+      const result = await onDelete(recipeId ?? '')
+      if (result) {
+        successToast({
+          title: 'レシピの削除が完了しました。',
+        })
+        router.push(`/recipes/search`)
+      } else {
+        errorToast({
+          title: 'レシピの削除に失敗しました。',
+        })
+      }
+    })
   }
 
   return (
@@ -159,7 +185,21 @@ export const RecipeForm = ({
             </Card>
           </VStack>
 
-          <Box textAlign="right" w="100%" mt={6}>
+          <HStack justifyContent="space-between" w="100%" mt={6}>
+            {isEdit ? (
+              <Button
+                colorScheme="orange"
+                size="lg"
+                type="button"
+                isLoading={isPending}
+                onClick={() => onOpen()}
+              >
+                レシピを削除する
+              </Button>
+            ) : (
+              <Spacer />
+            )}
+
             <Button
               colorScheme="green"
               size="lg"
@@ -168,9 +208,18 @@ export const RecipeForm = ({
             >
               {isEdit ? 'レシピを更新する' : 'レシピを投稿する'}
             </Button>
-          </Box>
+          </HStack>
         </form>
       </FormProvider>
+      {isEdit && onDelete && (
+        <DeleteModal
+          isOpen={isOpen}
+          onClose={onClose}
+          recipeId={recipeId ?? ''}
+          onDelete={deleteHandler}
+          isLoading={isPending}
+        />
+      )}
     </VStack>
   )
 }

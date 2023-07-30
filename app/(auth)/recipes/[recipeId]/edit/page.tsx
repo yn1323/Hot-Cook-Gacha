@@ -1,5 +1,5 @@
 import { NotFound } from '@/component/feature/notifications/NotFound'
-import { RecipeForm, SchemaType } from '@/component/feature/recipe/RecipeForm'
+import { RecipeForm } from '@/component/feature/recipe/RecipeForm'
 import {
   recipeDeleteFormAction,
   recipePutFormAction,
@@ -46,10 +46,6 @@ const RecipeEdit = async ({
 
   if (!recipe) {
     return <NotFound />
-  }
-
-  const onSubmit = async (data: SchemaType) => {
-    return true
   }
 
   return (

@@ -6,6 +6,7 @@ import Recipes from '@/page/(auth)/mypage/Recipes'
 import UserConfig from '@/page/(auth)/mypage/UserConfig'
 import { GetRecipes } from '@/page/(auth)/recipes/api/route'
 import { serverFetch } from '@/page/_src/api'
+import { RevalidateTags } from '@/page/_src/api/tags'
 
 async function initialize() {
   const { user } = await serverFetch<GetSelf>('/auth/self')
@@ -16,6 +17,9 @@ async function initialize() {
   const { recipes } = await serverFetch<GetRecipes>('/recipes/api', {
     query: {
       myRecipeOnly: true,
+    },
+    next: {
+      tags: [RevalidateTags.recipe],
     },
   })
 

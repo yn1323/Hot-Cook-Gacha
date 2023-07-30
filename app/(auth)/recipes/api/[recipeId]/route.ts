@@ -1,4 +1,3 @@
-import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
@@ -154,9 +153,6 @@ export const PUT = async (
   const prevRecipe = prev.data()
 
   if (!prevRecipe || !user || user.uid !== prevRecipe.author) {
-    console.log('prevRecipe')
-    console.log(prevRecipe)
-    console.log('here2')
     return NextResponse.json({ ok: false })
   }
 
@@ -181,8 +177,6 @@ export const PUT = async (
     console.error(e.message)
   }
 
-  revalidatePath(`/recipes/search`)
-
   return NextResponse.json({ ok: !!res })
 }
 
@@ -193,7 +187,7 @@ export type DeleteRecipe = BaseFetch & {
 }
 
 export const DELETE = async (
-  request: NextRequest,
+  _: NextRequest,
   { params: { recipeId } }: { params: { recipeId: string } }
 ) => {
   const token = cookies().get('token')?.value ?? ''
@@ -201,12 +195,14 @@ export const DELETE = async (
   const auth = getServerAuth()
   const user = await auth.verifyIdToken(token).catch(e => console.log(e))
 
-  const prevRecipe: any = await serverCollection
+  const prev: any = await serverCollection
     .doc('search')
     .collection('recipes')
     .doc(recipeId)
     .get()
     .catch(e => console.log(e))
+
+  const prevRecipe = prev.data()
 
   if (!user || user.uid !== prevRecipe.author) {
     return NextResponse.json({ ok: false })
