@@ -1,7 +1,10 @@
 export const makeQueryParamsString = (obj: { [key: string]: any }) => {
-  const params = new URLSearchParams()
+  const params: string[] = []
+
   Object.entries(obj).forEach(([key, value]) => {
-    params.append(key, value)
+    if (!value) return
+    params.push(`${key}=${value}`)
   })
-  return params.toString()
+
+  return params.join('&')
 }

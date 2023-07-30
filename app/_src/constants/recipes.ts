@@ -63,3 +63,5 @@ export const MarkOptions = [
   { value: 'square', label: '■' },
   { value: 'star', label: '★' },
 ]
+
+export const MaxRecipeShowPerPage = 30

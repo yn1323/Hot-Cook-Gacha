@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { MaxRecipeShowPerPage } from '@/constants/recipes'
 import { recipeSchemas } from '@/constants/validations'
 import { getServerAuth, serverCollection } from '@/firebase/server'
 import Recipe from '@/page/(auth)/recipes/[recipeId]/page'
@@ -33,7 +34,9 @@ export type GetRecipes = BaseFetch & {
       // 1つずるインデックスを貼ること
       oderBy?: 'dateCreated' | 'recipeId'
       // orderByで指定した値の次の開始位置をいれること(DBのoffsetとは違う！)
-      startAt?: any
+      startAfter?: any
+      endBefore?: any
+      endAt?: any
       myRecipeOnly?: boolean
       author?: string
     }
@@ -45,9 +48,9 @@ export const GET = async (request: NextRequest) => {
 
   const params = request.nextUrl.searchParams
   const query = {
-    limit: parseInt(params.get('limit') || '30'),
+    limit: parseInt(params.get('limit') || MaxRecipeShowPerPage.toString()),
     orderBy: params.get('orderBy') || 'recipeId',
-    startAt: params.get('startAt') || '',
+    startAfter: params.get('startAfter') || '',
     myRecipeOnly: params.get('myRecipeOnly') === 'true',
     author: params.get('author') || '',
   }
@@ -91,14 +94,16 @@ export const GET = async (request: NextRequest) => {
       .limit(query.limit)
   }
 
-  if (query.startAt) {
-    collection.startAt(query.startAt)
+  if (query.startAfter) {
+    collection = collection.startAfter(query.startAfter)
   }
 
   const res = await collection.get().catch(e => console.log(e))
 
   if (!res || res.docs.length === 0) {
-    return { recipes: [] }
+    return NextResponse.json({
+      recipes: [],
+    })
   }
   const recipes = res.docs.map(doc => {
     const data = doc.data()
