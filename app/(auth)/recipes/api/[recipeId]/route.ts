@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { recipeSchemas } from '@/constants/validations'
 import { getServerAuth, serverCollection } from '@/firebase/server'
 import { BaseFetch } from '@/page/_src/api'
-import { supabase } from '@/page/_src/supabase/server'
+import { supabase, supabaseEnv } from '@/page/_src/supabase/server'
 
 // TODO: トランザクション
 
@@ -107,11 +107,13 @@ export const POST = async (
     })
 
   try {
-    const result = await supabase.from('RECIPE_ID').insert({
-      recipeId: recipeId,
-      isDeleted: false,
-      isPublic: queries.isPublic,
-    })
+    const result = await supabase
+      .from(`${supabaseEnv.devSupabaseTablePostFix}RECIPE_ID`)
+      .insert({
+        recipeId: recipeId,
+        isDeleted: false,
+        isPublic: queries.isPublic,
+      })
   } catch (e: any) {
     console.error(e.message)
   }
@@ -169,7 +171,7 @@ export const PUT = async (
 
   try {
     const result = await supabase
-      .from('RECIPE_ID')
+      .from(`${supabaseEnv.devSupabaseTablePostFix}RECIPE_ID`)
       .update({
         isPublic: queries.isPublic,
       })
@@ -218,7 +220,7 @@ export const DELETE = async (
 
   try {
     const result = await supabase
-      .from('RECIPE_ID')
+      .from(`${supabaseEnv.devSupabaseTablePostFix}RECIPE_ID`)
       .update({
         isPublic: false,
         isDeleted: true,
