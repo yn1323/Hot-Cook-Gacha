@@ -26,9 +26,7 @@ export type GetRecipe = BaseFetch & {
     }
   }
   requestOptions: {
-    query: {
-      recipeId: string
-    }
+    query: {}
   }
 }
 

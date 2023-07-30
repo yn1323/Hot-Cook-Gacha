@@ -14,13 +14,18 @@ import { GetRecipes } from '@/page/(auth)/recipes/api/route'
 
 type Props = {
   recipes: GetRecipes['response']['recipes']
-  authors: {
+  authors?: {
     id: string
     name: string
   }[]
+  hideAuthor?: boolean
 }
 
-export const RecipeList = ({ authors, recipes }: Props) => {
+export const RecipeList = ({
+  authors = [],
+  recipes,
+  hideAuthor = false,
+}: Props) => {
   const router = useRouter()
 
   return (
@@ -81,11 +86,13 @@ export const RecipeList = ({ authors, recipes }: Props) => {
             >
               {recipe.title}
             </Text>
-            <Text color="gray.600" fontSize="xs" mt={1} noOfLines={1}>
-              by{' '}
-              {authors.find(({ id }) => id === recipe.author)?.name ??
-                '詠み人知らず'}
-            </Text>
+            {!hideAuthor && (
+              <Text color="gray.600" fontSize="xs" mt={1} noOfLines={1}>
+                by{' '}
+                {authors.find(({ id }) => id === recipe.author)?.name ??
+                  '詠み人知らず'}
+              </Text>
+            )}
             <Text fontSize="sm" noOfLines={2}>
               {recipe.ingredients.map(({ ingredient }) => ingredient).join(' ')}
             </Text>

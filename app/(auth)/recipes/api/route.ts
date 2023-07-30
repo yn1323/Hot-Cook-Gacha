@@ -1,8 +1,9 @@
 import console from 'console'
+import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { recipeSchemas } from '@/constants/validations'
-import { serverCollection } from '@/firebase/server'
+import { getServerAuth, serverCollection } from '@/firebase/server'
 import Recipe from '@/page/(auth)/recipes/[recipeId]/page'
 import { BaseFetch } from '@/page/_src/api'
 
@@ -34,24 +35,58 @@ export type GetRecipes = BaseFetch & {
       oderBy?: 'dateCreated' | 'recipeId'
       // orderByで指定した値の次の開始位置をいれること(DBのoffsetとは違う！)
       startAt?: any
+      myRecipeOnly?: boolean
+      author?: string
     }
   }
 }
 
 export const GET = async (request: NextRequest) => {
+  const token = cookies().get('token')?.value ?? ''
+
   const params = request.nextUrl.searchParams
   const query = {
     limit: parseInt(params.get('limit') || '30'),
     orderBy: params.get('orderBy') || 'recipeId',
     startAt: params.get('startAt') || '',
+    myRecipeOnly: params.get('myRecipeOnly') === 'true',
+    author: params.get('author') || '',
   }
 
-  let collection = serverCollection
-    .doc('search')
-    .collection('recipes')
-    .where('isPublic', '==', true)
-    .orderBy(query.orderBy)
-    .limit(query.limit)
+  const auth = getServerAuth()
+  const user = await auth.verifyIdToken(token).catch(e => console.log(e))
+
+  if (!user) {
+    console.error('Recipes auth error')
+    return NextResponse.json({ recipes: [] })
+  }
+
+  let collection = serverCollection.doc('search').collection('recipes')
+
+  if (query.myRecipeOnly) {
+    const auth = getServerAuth()
+    const user = await auth.verifyIdToken(token).catch(e => console.log(e))
+
+    if (!user) {
+      console.error('Recipes auth error')
+      return NextResponse.json({ recipes: [] })
+    }
+
+    collection
+      .where('author', '==', user.uid)
+      .orderBy(query.orderBy)
+      .limit(query.limit)
+  } else if (query.author) {
+    collection
+      .where('author', '==', query.author)
+      .orderBy(query.orderBy)
+      .limit(query.limit)
+  } else {
+    collection
+      .where('isPublic', '==', true)
+      .orderBy(query.orderBy)
+      .limit(query.limit)
+  }
 
   if (query.startAt) {
     collection.startAt(query.startAt)
