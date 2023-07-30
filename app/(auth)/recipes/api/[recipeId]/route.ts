@@ -168,11 +168,13 @@ export const PUT = async (
     })
 
   try {
-    const result = await supabase.from('RECIPE_ID').update({
-      recipeId: recipeId,
-      isDeleted: false,
-      isPublic: queries.isPublic,
-    })
+    const result = await supabase
+      .from('RECIPE_ID')
+      .update({
+        isPublic: queries.isPublic,
+      })
+      .eq('recipeId', recipeId)
+      .select()
   } catch (e: any) {
     console.error(e.message)
   }
@@ -215,11 +217,14 @@ export const DELETE = async (
     .delete()
 
   try {
-    const result = await supabase.from('RECIPE_ID').update({
-      recipeId: recipeId,
-      isDeleted: true,
-      isPublic: false,
-    })
+    const result = await supabase
+      .from('RECIPE_ID')
+      .update({
+        isPublic: false,
+        isDeleted: true,
+      })
+      .eq('recipeId', recipeId)
+      .select()
   } catch (e: any) {
     console.error(e.message)
   }

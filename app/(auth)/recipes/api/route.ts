@@ -1,4 +1,3 @@
-import console from 'console'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
@@ -72,7 +71,6 @@ export const GET = async (request: NextRequest) => {
     const user = await auth.verifyIdToken(token).catch(e => console.log(e))
 
     if (!user) {
-      console.error('Recipes auth error')
       return NextResponse.json({ recipes: [] })
     }
 
@@ -104,7 +102,6 @@ export const GET = async (request: NextRequest) => {
   }
   const recipes = res.docs.map(doc => {
     const data = doc.data()
-    console.log(data.title)
     return {
       ...data,
       dateCreated: data.dateCreated.toDate(),
