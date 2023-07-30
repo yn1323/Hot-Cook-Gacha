@@ -5,11 +5,7 @@ import { RecipeForm } from '.'
 const meta = {
   title: 'feature/recipe/RecipeForm',
   component: RecipeForm,
-  args: {
-    onSubmit: async function onSubmit() {
-      return true
-    },
-  },
+  args: {},
   parameters: {},
   decorators: [FormProviderDecorator],
 } satisfies Meta<typeof RecipeForm>
