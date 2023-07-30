@@ -96,6 +96,11 @@ export const RecipeList = ({
             <Text fontSize="sm" noOfLines={2}>
               {recipe.ingredients.map(({ ingredient }) => ingredient).join(' ')}
             </Text>
+            {recipe.tags && recipe.tags.length > 0 && (
+              <Text fontSize="xs" color="gray.400" noOfLines={1}>
+                {recipe.tags.join(' / ')}
+              </Text>
+            )}
           </VStack>
         </HStack>
       ))}

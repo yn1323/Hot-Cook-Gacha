@@ -124,6 +124,22 @@ export const RecipeDetail = ({ recipe, isEditable = false }: Props) => {
         </Center>
       </HStack>
 
+      {recipe.tags && recipe.tags.length > 0 && (
+        <HStack w="100%">
+          {recipe.tags.map((tag, index) => (
+            <Button
+              key={index}
+              colorScheme="green"
+              variant="outline"
+              size="sm"
+              onClick={() => alert('タグで検索できるようにしたい....!')}
+            >
+              {tag}
+            </Button>
+          ))}
+        </HStack>
+      )}
+
       <Divider />
 
       <HStack w="100%" justifyContent="space-between">
