@@ -54,7 +54,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "msw-storybook-addon": "^1.8.0",
     "prettier": "3.0.0",
-    "scaffdog": "^2.5.0",
+    "scaffdog": "^3.0.0",
     "storybook": "^7.0.20",
     "typescript": "5.1.6"
   },
