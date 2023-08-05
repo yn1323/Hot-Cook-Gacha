@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { recipeSchemas } from '@/constants/validations'
 import { getServerAuth, serverCollection } from '@/firebase/server'
+import { RecipeType } from '@/page/(auth)/recipes/api/route'
 import { BaseFetch } from '@/page/_src/api'
 import { supabase, supabaseEnv } from '@/page/_src/supabase/server'
 
@@ -17,15 +18,7 @@ type Comment = {
 
 export type GetRecipe = BaseFetch & {
   response: {
-    recipe: z.infer<typeof recipeSchemas> & {
-      recipeId: string
-      dateCreated: string
-      dateUpdate: string
-      version: number
-      author: string
-      comment: Comment[]
-      like: number
-    }
+    recipe: RecipeType
   }
   requestOptions: {
     query: {}
@@ -104,6 +97,7 @@ export const POST = async (
       author: user.uid,
       comment: [],
       like: 0,
+      random: Math.random(),
     })
 
   try {
