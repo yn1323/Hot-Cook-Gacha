@@ -14,8 +14,8 @@ import {
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Fragment } from 'react'
 import { MaxRecipeShowPerPage } from '@/constants/recipes'
-import { GetRecipes } from '@/page/(auth)/recipes/api/route'
 import { makeQueryParamsString } from '@/helpers/string'
+import { GetRecipes } from '@/page/(auth)/recipes/api/route'
 
 type Props = {
   recipes: GetRecipes['response']['recipes']
