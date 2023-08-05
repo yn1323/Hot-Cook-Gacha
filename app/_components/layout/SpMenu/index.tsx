@@ -2,7 +2,7 @@
 
 import { Button } from '@chakra-ui/button'
 import { Box, HStack, Text } from '@chakra-ui/layout'
-import { Icon, VStack } from '@chakra-ui/react'
+import { Icon, Link, VStack } from '@chakra-ui/react'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { AiFillHome } from 'react-icons/ai'
@@ -92,19 +92,19 @@ export const SpMenu = ({ children }: Props) => {
         px={4}
       >
         {Icons.map(({ label, icon, link }, i) => (
-          <Button
-            key={i}
-            h={LayoutStyles.NavHeight}
-            w="100%"
-            colorScheme="green"
-            aria-label={label}
-            onClick={() => router.push(link)}
-          >
-            <VStack>
-              <Icon as={icon} h={5} w={5} />
-              <Text fontSize="xs">{label}</Text>
-            </VStack>
-          </Button>
+          <Link key={i} href={link} style={{ width: '100%' }}>
+            <Button
+              h={LayoutStyles.NavHeight}
+              w="100%"
+              colorScheme="green"
+              aria-label={label}
+            >
+              <VStack>
+                <Icon as={icon} h={5} w={5} />
+                <Text fontSize="xs">{label}</Text>
+              </VStack>
+            </Button>
+          </Link>
         ))}
       </HStack>
     </Box>
