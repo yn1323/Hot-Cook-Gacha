@@ -2,11 +2,14 @@
 
 import { GetGachaRandom } from '@/page/(auth)/gacha/api/random/route'
 import { GetManyRecipes } from '@/page/(auth)/recipes/api/many/route'
+import { RecipeType } from '@/page/(auth)/recipes/api/route'
 import { serverFetch } from '@/page/_src/api'
 import { SchemaType } from '.'
 
 export type SearchQueryParams = {
   ids: string
+  term: string
+  cookPerDay: string
 }
 
 export async function gachaRandomGetFormAction(schema: SchemaType) {
@@ -36,6 +39,8 @@ export async function getRecipesFromIdsAction(params: SearchQueryParams) {
   return {
     recipes: params.ids
       .split(',')
-      .map(id => recipes.find(recipe => recipe.recipeId === id)),
+      .map(id =>
+        recipes.find(recipe => recipe.recipeId === id)
+      ) as RecipeType[],
   }
 }

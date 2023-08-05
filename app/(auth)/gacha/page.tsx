@@ -4,6 +4,7 @@ import {
   gachaRandomGetFormAction,
   getRecipesFromIdsAction,
 } from '@/component/feature/gacha/GachaForm/action'
+import { GachaResult } from '@/component/feature/gacha/GachaResult'
 import { Animation } from '@/component/layout/Animation'
 import { Center } from '@/component/layout/Center'
 
@@ -14,6 +15,7 @@ const Gacha = async ({ searchParams }: { searchParams: SearchQueryParams }) => {
     <Animation>
       <Center divider>
         <GachaForm onSubmit={gachaRandomGetFormAction} />
+        <GachaResult recipes={recipes} />
       </Center>
     </Animation>
   )

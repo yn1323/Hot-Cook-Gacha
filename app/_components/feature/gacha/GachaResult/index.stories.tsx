@@ -1,10 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react'
 import { FormProviderDecorator } from '@/config/Decorators'
-import { RecipeList } from '.'
+import { GachaResult } from '.'
 
 const meta = {
-  title: 'feature/recipe/RecipeList',
-  component: RecipeList,
+  title: 'feature/gacha/GachaResult',
+  component: GachaResult,
   args: {
     recipes: [
       {
@@ -12,7 +12,7 @@ const meta = {
         like: 0,
         author: 'knosWyHDtOVbWNTFPhHsb6zd8ts1',
         description: '',
-        title: '２こめ',
+        title: '1こめ',
         type: 'soup',
         preDirections: [{ image: '', direction: '' }],
         postDirections: [{ image: '', direction: '' }],
@@ -70,11 +70,10 @@ const meta = {
         random: 0.5,
       },
     ],
-    authors: [],
   },
   parameters: {},
   decorators: [FormProviderDecorator],
-} satisfies Meta<typeof RecipeList>
+} satisfies Meta<typeof GachaResult>
 export default meta
 
 export const Basic: StoryObj<typeof meta> = {}

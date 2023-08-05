@@ -34,7 +34,9 @@ export const GachaForm = ({ onSubmit }: Props) => {
     if (!onSubmit) return
     startTransition(async () => {
       const { recipeIds } = await onSubmit(data)
-      router.push(`/gacha?ids=${recipeIds}`)
+      router.push(
+        `/gacha?ids=${recipeIds}&term=${data.term}&cookPerDay=${data.cookPerDay}`
+      )
       setIsInitial(false)
     })
   }
