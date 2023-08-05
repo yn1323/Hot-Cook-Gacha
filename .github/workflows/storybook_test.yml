@@ -14,20 +14,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      # https://github.com/swc-project/swc/issues/5616
-      - name: Install swc
-        run: |
-          npm install --save-optional \
-          "@swc/core-darwin-arm64" \
-          "@swc/core-darwin-x64" \
-          "@swc/core-linux-arm-gnueabihf" \
-          "@swc/core-linux-arm64-gnu" \
-          "@swc/core-linux-arm64-musl" \
-          "@swc/core-linux-x64-gnu" \
-          "@swc/core-linux-x64-musl" \
-          "@swc/core-win32-arm64-msvc" \
-          "@swc/core-win32-ia32-msvc" \
-          "@swc/core-win32-x64-msvc"
       - name: StorybookTest
         uses: ./.github/actions/storybook_test
         with:
