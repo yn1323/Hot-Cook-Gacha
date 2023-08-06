@@ -51,7 +51,7 @@
     "eslint-config-next": "13.4.12",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-storybook": "^0.6.12",
-    "eslint-plugin-unused-imports": "^2.0.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "msw-storybook-addon": "^1.8.0",
     "prettier": "3.0.1",
     "scaffdog": "^3.0.0",
