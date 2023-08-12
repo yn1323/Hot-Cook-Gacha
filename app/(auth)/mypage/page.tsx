@@ -9,12 +9,9 @@ import { serverFetch } from '@/page/_src/api'
 import { RevalidateTags } from '@/page/_src/api/tags'
 
 async function initialize() {
-  const { user } = await serverFetch<GetSelf>('/auth/self')
-  if (!user) {
-    return { user: { name: '', uid: '', picture: '', recipes: [] } }
-  }
+  const userFetch = serverFetch<GetSelf>('/auth/self')
 
-  const { recipes } = await serverFetch<GetRecipes>('/recipes/api', {
+  const recipesFetch = serverFetch<GetRecipes>('/recipes/api', {
     query: {
       myRecipeOnly: true,
     },
@@ -23,8 +20,10 @@ async function initialize() {
     },
   })
 
+  const [{ user }, { recipes }] = await Promise.all([userFetch, recipesFetch])
+
   return {
-    user,
+    user: user ?? { name: '', uid: '', picture: '' },
     recipes,
   }
 }
