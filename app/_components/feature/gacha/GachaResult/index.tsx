@@ -1,10 +1,12 @@
 'use client'
 
-import { Divider, HStack, IconButton, Text, VStack } from '@chakra-ui/react'
+import { Box, HStack, IconButton, Text, VStack } from '@chakra-ui/react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useMemo, useState, useTransition } from 'react'
 import { FaExchangeAlt } from 'react-icons/fa'
 import { gachaRandomGetFormAction } from '@/component/feature/gacha/GachaForm/action'
+import { GachaTotalIngredients } from '@/component/feature/gacha/GachaTotalIngredients'
+import { GachaDayIngredients } from '@/component/feature/gacha/GachDayIngredients'
 import { RecipeList } from '@/component/feature/recipe/RecipeList'
 import { RecipeType } from '@/page/(auth)/recipes/api/route'
 
@@ -64,7 +66,8 @@ export const GachaResult = ({ recipes, onReselect }: Props) => {
   }
 
   return (
-    <VStack divider={<Divider />} w="100%">
+    // スクロールなし→スクロールありの画面に遷移すると正常に画面下部のマージンが付与されないため
+    <VStack w="100%" mb={'72px'}>
       {dailyRecipes.map((recipes, i) => (
         <VStack key={i} w="100%">
           <HStack justifyContent="space-between" w="100%" px={2} mt={4}>
@@ -79,6 +82,13 @@ export const GachaResult = ({ recipes, onReselect }: Props) => {
               icon={<FaExchangeAlt />}
             />
           </HStack>
+          <Box w="100%" my={4}>
+            <GachaDayIngredients
+              recipes={recipes}
+              title={`${i + 1}日目の材料`}
+            />
+          </Box>
+
           <VStack w="100%">
             <RecipeList
               recipes={recipes}
@@ -88,6 +98,8 @@ export const GachaResult = ({ recipes, onReselect }: Props) => {
           </VStack>
         </VStack>
       ))}
+
+      <GachaTotalIngredients recipes={recipes} term={term} />
     </VStack>
   )
 }

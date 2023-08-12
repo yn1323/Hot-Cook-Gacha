@@ -13,9 +13,14 @@ const Gacha = async ({ searchParams }: { searchParams: SearchQueryParams }) => {
 
   return (
     <Animation>
-      <Center divider>
+      <Center>
         <GachaForm onSubmit={gachaRandomGetFormAction} />
-        <GachaResult recipes={recipes} onReselect={gachaRandomGetFormAction} />
+        {recipes.length > 0 && (
+          <GachaResult
+            recipes={recipes}
+            onReselect={gachaRandomGetFormAction}
+          />
+        )}
       </Center>
     </Animation>
   )
