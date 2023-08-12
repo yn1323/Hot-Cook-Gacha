@@ -4,13 +4,11 @@ import { Box, HStack, IconButton, Text, VStack } from '@chakra-ui/react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useMemo, useState, useTransition } from 'react'
 import { FaExchangeAlt } from 'react-icons/fa'
+import { GachaDayIngredients } from '@/component/feature/gacha/GachaDayIngredients'
 import { gachaRandomGetFormAction } from '@/component/feature/gacha/GachaForm/action'
 import { GachaTotalIngredients } from '@/component/feature/gacha/GachaTotalIngredients'
-import { GachaDayIngredients } from '@/component/feature/gacha/GachDayIngredients'
 import { RecipeList } from '@/component/feature/recipe/RecipeList'
 import { RecipeType } from '@/page/(auth)/recipes/api/route'
-
-const GridItemHeight = 32
 
 type Props = {
   recipes: RecipeType[]

@@ -1,5 +1,7 @@
 'use server'
 
+import { revalidateTag } from 'next/cache'
+import { PostGachaHistory } from '@/page/(auth)/gacha/api/history/route'
 import { GetGachaRandom } from '@/page/(auth)/gacha/api/random/route'
 import { GetManyRecipes } from '@/page/(auth)/recipes/api/many/route'
 import { RecipeType } from '@/page/(auth)/recipes/api/route'
@@ -29,12 +31,21 @@ export async function gachaRandomGetFormAction(schema: SchemaType) {
 
 export async function getRecipesFromIdsAction(params: SearchQueryParams) {
   if (!params.ids) return { recipes: [] }
-  const { recipes } = await serverFetch<GetManyRecipes>(`/recipes/api/many`, {
+  const recipesFetch = serverFetch<GetManyRecipes>(`/recipes/api/many`, {
     query: {
       ...params,
     },
     method: 'GET',
   })
+
+  const historyPost = serverFetch<PostGachaHistory>(`/gacha/api/history`, {
+    query: {
+      url: `/gacha?ids=${params.ids}&term=${params.term}&cookPerDay=${params.cookPerDay}`,
+    },
+    method: 'POST',
+  })
+
+  const [{ recipes }, { ok }] = await Promise.all([recipesFetch, historyPost])
 
   return {
     recipes: params.ids
@@ -43,4 +54,16 @@ export async function getRecipesFromIdsAction(params: SearchQueryParams) {
         recipes.find(recipe => recipe.recipeId === id)
       ) as RecipeType[],
   }
+}
+
+export async function postGachaUrlAction(url: string) {
+  const { ok } = await serverFetch<PostGachaHistory>(`/gacha/api/history`, {
+    query: {
+      url,
+    },
+    method: 'POST',
+  })
+  revalidateTag('gacha')
+
+  return !!ok
 }
