@@ -53,9 +53,9 @@ export const RecipeList = ({
   return (
     <Fragment>
       <VStack divider={<Divider />} w="100%">
-        {recipes.map(recipe => (
+        {recipes.map((recipe, i) => (
           <HStack
-            key={recipe.recipeId}
+            key={recipe.recipeId + i}
             w="100%"
             h={24}
             gap={2}
