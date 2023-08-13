@@ -18,17 +18,22 @@ export const GET = async (_: NextRequest) => {
   const auth = getServerAuth()
   const user = await auth.verifyIdToken(token).catch(e => console.log(e))
 
+  if (!user) {
+    return NextResponse.json({ gachaHistories: [] })
+  }
+
   const res = await serverCollection
     .doc('search')
-    .collection('gachaHistories')
-    .where('userId', '==', user?.uid ?? '')
+    .collection('gachaHistory')
+    .where('userId', '==', user.uid)
     .limit(20)
     .get()
     .catch(e => console.log(e))
 
-  if (!res || res.docs.length === 0) {
-    return { gachaHistories: null }
+  if (!res) {
+    return NextResponse.json({ gachaHistories: [] })
   }
+
   const gachaHistories = res.docs
     .map(doc => doc.data())
     .map(all => ({
