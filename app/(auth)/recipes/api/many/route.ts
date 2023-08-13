@@ -21,8 +21,6 @@ export const GET = async (request: NextRequest) => {
   }
   const ids = query.ids.split(',')
 
-  console.log('ids', ids)
-
   const res = await serverCollection
     .doc('search')
     .collection('recipes')

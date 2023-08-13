@@ -20,8 +20,8 @@ const meta = {
       prepTime: 30,
       tags: ['初心者'],
       servings: '2',
-      dateCreated: '2023-07-17T03:01:32.797Z',
-      dateUpdate: '2023-07-17T03:01:32.797Z',
+      dateCreated: new Date('2023-07-17T03:01:32.797Z'),
+      dateUpdate: new Date('2023-07-17T03:01:32.797Z'),
       genre: 'japanese',
       ingredients: [
         {
@@ -51,6 +51,7 @@ const meta = {
       hotcookDirections: [{ image: '', direction: '333' }],
       authorName: '名前',
       authorPicture: '',
+      random: 0.1,
     },
   },
   parameters: {},
