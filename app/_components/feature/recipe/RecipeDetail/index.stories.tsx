@@ -20,8 +20,8 @@ const meta = {
       prepTime: 30,
       tags: ['初心者'],
       servings: '2',
-      dateCreated: new Date('2023-07-17T03:01:32.797Z'),
-      dateUpdate: new Date('2023-07-17T03:01:32.797Z'),
+      dateCreated: '2023-08-05T08:20:09.325Z',
+      dateUpdated: '2023-08-05T08:20:09.325Z',
       genre: 'japanese',
       ingredients: [
         {

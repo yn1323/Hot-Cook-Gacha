@@ -92,7 +92,7 @@ export const POST = async (
       recipeId,
       ...queries,
       dateCreated: new Date(),
-      dateUpdate: new Date(),
+      dateUpdated: new Date(),
       version: 1,
       author: user.uid,
       comment: [],

@@ -15,8 +15,8 @@ type Comment = {
 
 export type RecipeType = z.infer<typeof recipeSchemas> & {
   recipeId: string
-  dateCreated: Date
-  dateUpdate: Date
+  dateCreated: string
+  dateUpdated: string
   version: number
   author: string
   comment: Comment[]

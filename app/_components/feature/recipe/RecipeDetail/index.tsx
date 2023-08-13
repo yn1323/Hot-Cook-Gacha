@@ -298,7 +298,7 @@ export const RecipeDetail = ({ recipe, isEditable = false }: Props) => {
 
       <Text w="100%" textAlign="right">
         作成日：
-        {firebaseDateToStr(recipe.dateCreated.toString(), 'yyyy年MM月dd日')}
+        {firebaseDateToStr(recipe.dateCreated, 'yyyy年MM月dd日')}
       </Text>
     </VStack>
   )

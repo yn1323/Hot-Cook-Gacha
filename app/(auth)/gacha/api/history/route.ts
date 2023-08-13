@@ -8,7 +8,7 @@ export type GetGachaHistory = BaseFetch & {
     gachaHistories: {
       userId: string
       url: string
-      dateCreated: Date
+      dateCreated: string
     }[]
   }
   requestOptions: {}
