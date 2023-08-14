@@ -213,9 +213,3 @@ export const IngredientsInput = ({ required }: Props) => {
     </FormControl>
   )
 }
-
-{
-  /* {errorMessage && (
-        <FormHelperText color="crimson">{errorMessage}</FormHelperText>
-      )} */
-}

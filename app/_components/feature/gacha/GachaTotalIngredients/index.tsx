@@ -44,12 +44,27 @@ export const GachaTotalIngredients = ({ recipes, term }: Props) => {
           </h2>
           <AccordionPanel pb={4} w="100%">
             {totalIngredients.map(({ name, amounts }, i) => (
-              <HStack key={i} w="100%" mt={2}>
-                <Text w="60%">{name}</Text>
-                <UnorderedList>
+              <HStack
+                key={i}
+                w="100%"
+                mt={2}
+                justifyContent="space-between"
+                gap={12}
+                alignItems="stretch"
+              >
+                <Text w="100%" textAlign="right" fontSize="sm">
+                  {name}
+                </Text>
+                <UnorderedList
+                  w="100%"
+                  textAlign="left"
+                  fontSize="sm"
+                  styleType="none"
+                >
                   {amounts.map((amount, j) => (
                     <ListItem key={j}>{amount}</ListItem>
                   ))}
+                  {amounts.length === 0 && <ListItem>-</ListItem>}
                 </UnorderedList>
               </HStack>
             ))}

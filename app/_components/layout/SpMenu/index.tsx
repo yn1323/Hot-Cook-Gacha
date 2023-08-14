@@ -2,18 +2,16 @@
 
 import { Button } from '@chakra-ui/button'
 import { Box, HStack, Text } from '@chakra-ui/layout'
-import { Center, Icon, Link, VStack } from '@chakra-ui/react'
-import { usePathname, useRouter } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import { Icon, VStack } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
+import React from 'react'
 import { AiFillHome } from 'react-icons/ai'
-import { BiLogOut } from 'react-icons/bi'
 import {
   BsFillCalendarCheckFill,
   BsFillPersonFill,
   BsSearch,
 } from 'react-icons/bs'
 import { MdPostAdd } from 'react-icons/md'
-import { useSession } from '@/hooks/auth/useSession'
 
 const Icons = [
   { label: 'Top', icon: AiFillHome, link: '/dashboard' },
@@ -43,42 +41,14 @@ type Props = {
 
 export const SpMenu = ({ children }: Props) => {
   const router = useRouter()
-  const { logout } = useSession()
-  const parentRef = useRef<HTMLDivElement>(null)
-  const childRef = useRef<HTMLDivElement>(null)
-  const pathname = usePathname()
-  const [spacer, setSpacer] = useState(false)
-  useEffect(() => {
-    const parentHeight = parentRef.current?.clientHeight ?? 0
-    const childHeight = childRef.current?.clientHeight ?? 0
-
-    setSpacer(parentHeight < childHeight + LayoutStyles.Padding * 4 * 2)
-  }, [pathname])
 
   return (
     <Box h="100vh">
-      <Box p={LayoutStyles.Padding} h="calc(100vh - 56px)" ref={parentRef}>
-        <HStack
-          justifyContent="space-between"
-          w="100%"
-          h={LayoutStyles.HeaderHeight}
-        >
-          <Text as="h1" fontSize="3xl">
-            TOP
-          </Text>
-          <Button
-            colorScheme="green"
-            variant="ghost"
-            leftIcon={<BiLogOut />}
-            onClick={logout}
-          >
-            ログアウト
-          </Button>
-        </HStack>
-        <Box ref={childRef}>{children}</Box>
+      <Box p={LayoutStyles.Padding} h="calc(100vh - 56px)">
+        <Box>{children}</Box>
         {/* childrenの高さが大きいとナビゲーションバーの背後に隠れてしまうため */}
         {/* margin, paddingで調整が難しく(flexとかのせい？) divで調整する */}
-        {spacer && <Box pt="72px" />}
+        <Box pt="72px" />
       </Box>
 
       <HStack
@@ -92,21 +62,19 @@ export const SpMenu = ({ children }: Props) => {
         px={4}
       >
         {Icons.map(({ label, icon, link }, i) => (
-          <Link key={i} href={link} style={{ width: '100%' }}>
-            <Center>
-              <Button
-                h={LayoutStyles.NavHeight}
-                w="calc(20vw - 32px)"
-                colorScheme="green"
-                aria-label={label}
-              >
-                <VStack>
-                  <Icon as={icon} h={5} w={5} />
-                  <Text fontSize="xs">{label}</Text>
-                </VStack>
-              </Button>
-            </Center>
-          </Link>
+          <Button
+            key={i}
+            h={LayoutStyles.NavHeight}
+            w="100%"
+            colorScheme="green"
+            aria-label={label}
+            onClick={() => router.push(link)}
+          >
+            <VStack>
+              <Icon as={icon} h={5} w={5} />
+              <Text fontSize="xs">{label}</Text>
+            </VStack>
+          </Button>
         ))}
       </HStack>
     </Box>

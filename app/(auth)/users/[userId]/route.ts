@@ -43,7 +43,7 @@ export const GET = async (
     user: {
       ...user,
       dateCreated: user && user.dateCreated.toDate(),
-      dateUpdated: user && user.dateUpdate.toDate(),
+      dateUpdated: user && user.dateUpdated.toDate(),
     },
   })
 }

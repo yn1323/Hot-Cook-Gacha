@@ -2,6 +2,7 @@ import { userConfigFormAction } from '@/component/feature/userConfig/UserConfigF
 import { Animation } from '@/component/layout/Animation'
 import { Center } from '@/component/layout/Center'
 import { GetSelf } from '@/page/(auth)/auth/self/route'
+import { Logout } from '@/page/(auth)/mypage/_Logout'
 import Recipes from '@/page/(auth)/mypage/Recipes'
 import UserConfig from '@/page/(auth)/mypage/UserConfig'
 import { GetRecipes } from '@/page/(auth)/recipes/api/route'
@@ -43,6 +44,7 @@ const MyPage = async () => {
           onSubmit={userConfigFormAction}
         />
         <Recipes recipes={recipes} />
+        <Logout />
       </Center>
     </Animation>
   )

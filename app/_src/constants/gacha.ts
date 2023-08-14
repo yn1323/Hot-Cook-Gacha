@@ -9,7 +9,7 @@ export const TermOptions = [
 ]
 
 export const CookPerDayOptions = [
-  { value: '1', label: '1回' },
-  { value: '2', label: '2回' },
-  { value: '3', label: '3回' },
+  { value: '1', label: '1個' },
+  { value: '2', label: '2個' },
+  { value: '3', label: '3個' },
 ]

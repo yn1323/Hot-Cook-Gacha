@@ -7,7 +7,7 @@ import loading from './images/loading.gif'
 export const PageLoading = () => {
   return (
     <Box h="80vh">
-      <Center>
+      <Center h="100%">
         <Image src={loading} alt="loading" />
       </Center>
     </Box>

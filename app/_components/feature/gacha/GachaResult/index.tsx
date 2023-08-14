@@ -64,8 +64,7 @@ export const GachaResult = ({ recipes, onReselect }: Props) => {
   }
 
   return (
-    // スクロールなし→スクロールありの画面に遷移すると正常に画面下部のマージンが付与されないため
-    <VStack w="100%" mb={'72px'}>
+    <VStack w="100%">
       {dailyRecipes.map((recipes, i) => (
         <VStack key={i} w="100%">
           <HStack justifyContent="space-between" w="100%" px={2} mt={4}>

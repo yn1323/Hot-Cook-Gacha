@@ -1,6 +1,7 @@
 'use client'
 
-import { Center, Divider, Link } from '@chakra-ui/react'
+import { Center, Divider } from '@chakra-ui/react'
+import Link from 'next/link'
 import { Fragment } from 'react'
 
 export const ShowMore = () => {

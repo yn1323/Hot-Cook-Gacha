@@ -12,7 +12,6 @@ const Dashboard = () => {
       <Suspense fallback={<div>loading...</div>}>
         <RecentGachaHistory />
       </Suspense>
-      <div style={{ marginBottom: '72px' }} />
     </Animation>
   )
 }

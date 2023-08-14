@@ -1,7 +1,8 @@
 'use client'
 
-import { Stack, Button, Box, Link, VStack, Text } from '@chakra-ui/react'
+import { Box, Button, Stack, Text, VStack } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { MailInput } from '@/component/form/MailInput'

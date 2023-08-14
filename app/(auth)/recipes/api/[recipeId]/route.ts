@@ -56,7 +56,7 @@ export const GET = async (
     recipe: {
       ...recipe,
       dateCreated: recipe.dateCreated.toDate(),
-      dateUpdated: recipe.dateUpdate.toDate(),
+      dateUpdated: recipe.dateUpdated.toDate(),
     },
   })
 }

@@ -23,7 +23,7 @@ export const CookPerDaySelect = () => {
 
   return (
     <FormControl id="cookPerDay" isInvalid={!!errors.cookPerDay}>
-      <FormLabel>1日に表示するメニュー数</FormLabel>
+      <FormLabel>1日のレシピ数</FormLabel>
       <Select {...register('cookPerDay')} defaultValue={'1'}>
         {CookPerDayOptions.map(({ value, label }) => (
           <option key={value} value={value}>
