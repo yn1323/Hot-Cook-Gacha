@@ -3,17 +3,15 @@
 import { Button } from '@chakra-ui/button'
 import { Box, HStack, Text } from '@chakra-ui/layout'
 import { Icon, VStack } from '@chakra-ui/react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { AiFillHome } from 'react-icons/ai'
-import { BiLogOut } from 'react-icons/bi'
 import {
   BsFillCalendarCheckFill,
   BsFillPersonFill,
   BsSearch,
 } from 'react-icons/bs'
 import { MdPostAdd } from 'react-icons/md'
-import { useSession } from '@/hooks/auth/useSession'
 
 const Icons = [
   { label: 'Top', icon: AiFillHome, link: '/dashboard' },
@@ -43,29 +41,10 @@ type Props = {
 
 export const SpMenu = ({ children }: Props) => {
   const router = useRouter()
-  const { logout } = useSession()
-  const pathname = usePathname()
 
   return (
     <Box h="100vh">
       <Box p={LayoutStyles.Padding} h="calc(100vh - 56px)">
-        <HStack
-          justifyContent="space-between"
-          w="100%"
-          h={LayoutStyles.HeaderHeight}
-        >
-          <Text as="h1" fontSize="3xl">
-            TOP
-          </Text>
-          <Button
-            colorScheme="green"
-            variant="ghost"
-            leftIcon={<BiLogOut />}
-            onClick={logout}
-          >
-            ログアウト
-          </Button>
-        </HStack>
         <Box>{children}</Box>
         {/* childrenの高さが大きいとナビゲーションバーの背後に隠れてしまうため */}
         {/* margin, paddingで調整が難しく(flexとかのせい？) divで調整する */}
