@@ -8,8 +8,14 @@
       "type": "node-terminal"
     },
     {
-      "command": "rm -r ./.next && npm run dev",
+      "command": "rm -r -f ./.next && npm run dev",
       "name": "Next.js dev",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "rm -r -f ./.next && npm run build && npm run start",
+      "name": "Next.js buid & start",
       "request": "launch",
       "type": "node-terminal"
     }

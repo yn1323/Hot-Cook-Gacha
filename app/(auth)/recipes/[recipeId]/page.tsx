@@ -7,13 +7,15 @@ import { GetUser } from '@/page/(auth)/users/[userId]/route'
 import { serverFetch } from '@/page/_src/api'
 
 async function initialize(recipeId: string) {
-  const { user } = await serverFetch<GetUser>('/auth/self')
-  const { recipe } = await serverFetch<GetRecipe>(`/recipes/api/${recipeId}`, {
+  const userFetch = serverFetch<GetUser>('/auth/self')
+  const recipeFetch = serverFetch<GetRecipe>(`/recipes/api/${recipeId}`, {
     query: {},
     next: {
       tags: ['recipe'],
     },
   })
+
+  const [{ user }, { recipe }] = await Promise.all([userFetch, recipeFetch])
 
   if (!recipe) {
     return null

@@ -23,8 +23,8 @@ import {
   ServingOptions,
   UnitOptions,
 } from '@/constants/recipes'
-import { GetRecipe } from '@/page/(auth)/recipes/api/[recipeId]/route'
 import { firebaseDateToStr } from '@/helpers/date'
+import { GetRecipe } from '@/page/(auth)/recipes/api/[recipeId]/route'
 
 type Props = {
   recipe: GetRecipe['response']['recipe'] & {
@@ -297,7 +297,8 @@ export const RecipeDetail = ({ recipe, isEditable = false }: Props) => {
       )}
 
       <Text w="100%" textAlign="right">
-        作成日：{firebaseDateToStr(recipe.dateCreated, 'yyyy年MM月dd日')}
+        作成日：
+        {firebaseDateToStr(recipe.dateCreated, 'yyyy年MM月dd日')}
       </Text>
     </VStack>
   )

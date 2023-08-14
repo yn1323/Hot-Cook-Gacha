@@ -20,14 +20,6 @@ async function accountExistCheck() {
   })
 }
 
-async function initialize() {
-  const { user } = await serverFetch<GetSelf>('/auth/self')
-  if (!user) {
-    return { name: '', uid: '' }
-  }
-  return user
-}
-
 const AuthTemplate = async ({
   children,
 }: {
@@ -35,7 +27,6 @@ const AuthTemplate = async ({
 }) => {
   await accountExistCheck()
 
-  const { name } = await initialize()
   return <SpMenu>{children}</SpMenu>
 }
 

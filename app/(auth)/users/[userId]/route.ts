@@ -13,8 +13,8 @@ export type GetUser = BaseFetch & {
     user:
       | null
       | (UserDocument & {
-          dateCreated: Date
-          dateUpdate: Date
+          dateCreated: string
+          dateUpdated: string
         })
   }
   requestOptions: {
@@ -43,7 +43,7 @@ export const GET = async (
     user: {
       ...user,
       dateCreated: user && user.dateCreated.toDate(),
-      dateUpdate: user && user.dateUpdate.toDate(),
+      dateUpdated: user && user.dateUpdate.toDate(),
     },
   })
 }
@@ -67,7 +67,7 @@ export const POST = async (request: NextRequest) => {
       name,
       picture,
       dateCreated: new Date(),
-      dateUpdate: new Date(),
+      dateUpdated: new Date(),
     })
 
   return NextResponse.json(res)
@@ -95,7 +95,7 @@ export const PUT = async (
     .update({
       ...(name ? { name } : {}),
       ...(picture ? { picture } : {}),
-      dateUpdate: new Date(),
+      dateUpdated: new Date(),
     })
     .catch(e => console.log(e))
 

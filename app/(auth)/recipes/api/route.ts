@@ -4,7 +4,6 @@ import { z } from 'zod'
 import { MaxRecipeShowPerPage } from '@/constants/recipes'
 import { recipeSchemas } from '@/constants/validations'
 import { getServerAuth, serverCollection } from '@/firebase/server'
-import Recipe from '@/page/(auth)/recipes/[recipeId]/page'
 import { BaseFetch } from '@/page/_src/api'
 
 type Comment = {
@@ -14,19 +13,20 @@ type Comment = {
   text: string
 }
 
-type Recipe = z.infer<typeof recipeSchemas> & {
+export type RecipeType = z.infer<typeof recipeSchemas> & {
   recipeId: string
-  dateCreated: Date
-  dateUpdate: Date
+  dateCreated: string
+  dateUpdated: string
   version: number
   author: string
   comment: Comment[]
   like: number
+  random: number
 }
 
 export type GetRecipes = BaseFetch & {
   response: {
-    recipes: Recipe[]
+    recipes: RecipeType[]
   }
   requestOptions: {
     query: {

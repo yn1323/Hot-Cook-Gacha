@@ -82,3 +82,8 @@ export const recipeSchemas = z.object({
   isPublic: z.boolean(), // 公開・非公開
   tags: z.array(z.string()).max(5, 'タグは5個以内にしてください。').optional(), // 任意のタグ
 })
+
+export const gachaSchemas = z.object({
+  term: z.string().nonempty('必須入力です'),
+  cookPerDay: z.string().nonempty('必須入力です'),
+})
