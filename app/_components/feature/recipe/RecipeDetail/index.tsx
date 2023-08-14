@@ -183,11 +183,20 @@ export const RecipeDetail = ({ recipe, isEditable = false }: Props) => {
         <VStack w="100%" spacing={4}>
           {recipe.ingredients.map((ingredient, index) => (
             <VStack w="100%" key={index}>
-              <HStack w="100%" justifyContent="space-between">
-                <Box w="60%">
+              <HStack
+                w="100%"
+                justifyContent="space-between"
+                gap={12}
+                alignItems="stretch"
+              >
+                <Box w="100%">
                   <Text textAlign="right" noOfLines={5} fontSize="sm">
                     {MarkOptions.find(({ value }) => value === ingredient.mark)
-                      ?.label ?? ''}
+                      ?.label === '-'
+                      ? ''
+                      : MarkOptions.find(
+                          ({ value }) => value === ingredient.mark
+                        )?.label}
                     {ingredient.ingredient}
                   </Text>
                   {ingredient.prep && (
@@ -196,7 +205,7 @@ export const RecipeDetail = ({ recipe, isEditable = false }: Props) => {
                     </Text>
                   )}
                 </Box>
-                <Text w="40%" noOfLines={5} textAlign="center" fontSize="sm">
+                <Text w="100%" noOfLines={5} textAlign="left" fontSize="sm">
                   {ingredient.amount}{' '}
                   {UnitOptions.find(({ value }) => value === ingredient.unit)
                     ?.label === '単位なし'

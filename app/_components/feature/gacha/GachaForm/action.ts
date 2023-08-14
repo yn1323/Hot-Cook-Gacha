@@ -12,6 +12,7 @@ export type SearchQueryParams = {
   ids: string
   term: string
   cookPerDay: string
+  noStore?: string
 }
 
 export async function gachaRandomGetFormAction(schema: SchemaType) {
@@ -38,14 +39,18 @@ export async function getRecipesFromIdsAction(params: SearchQueryParams) {
     method: 'GET',
   })
 
-  const historyPost = serverFetch<PostGachaHistory>(`/gacha/api/history`, {
-    query: {
-      url: `/gacha?ids=${params.ids}&term=${params.term}&cookPerDay=${params.cookPerDay}`,
-    },
-    method: 'POST',
-  })
+  const historyPost = params.noStore
+    ? () => {}
+    : serverFetch<PostGachaHistory>(`/gacha/api/history`, {
+        query: {
+          url: `/gacha?ids=${params.ids}&term=${params.term}&cookPerDay=${params.cookPerDay}`,
+        },
+        method: 'POST',
+      })
 
-  const [{ recipes }, { ok }] = await Promise.all([recipesFetch, historyPost])
+  const [{ recipes }] = await Promise.all([recipesFetch, historyPost])
+
+  revalidateTag('gacha')
 
   return {
     recipes: params.ids
@@ -63,7 +68,6 @@ export async function postGachaUrlAction(url: string) {
     },
     method: 'POST',
   })
-  revalidateTag('gacha')
 
   return !!ok
 }

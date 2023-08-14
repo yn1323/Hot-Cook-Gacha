@@ -23,7 +23,7 @@ export const TermSelect = () => {
 
   return (
     <FormControl id="term" isInvalid={!!errors.term}>
-      <FormLabel>レシピ日数</FormLabel>
+      <FormLabel>日数</FormLabel>
       <Select {...register('term')} defaultValue="5">
         {TermOptions.map(({ value, label }) => (
           <option key={value} value={value}>

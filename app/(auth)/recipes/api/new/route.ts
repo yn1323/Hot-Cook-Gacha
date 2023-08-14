@@ -30,7 +30,7 @@ export const GET = async (_: NextRequest) => {
     return {
       ...data,
       dateCreated: data.dateCreated.toDate(),
-      dateUpdated: data.dateUpdate.toDate(),
+      dateUpdated: data.dateUpdated.toDate(),
     }
   })
 

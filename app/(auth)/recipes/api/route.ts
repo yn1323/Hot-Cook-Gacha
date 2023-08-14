@@ -49,7 +49,7 @@ export const GET = async (request: NextRequest) => {
   const params = request.nextUrl.searchParams
   const query = {
     limit: parseInt(params.get('limit') || MaxRecipeShowPerPage.toString()),
-    orderBy: params.get('orderBy') || 'recipeId',
+    orderBy: params.get('orderBy') || 'dateCreated',
     startAfter: params.get('startAfter') || '',
     myRecipeOnly: params.get('myRecipeOnly') === 'true',
     author: params.get('author') || '',
@@ -79,18 +79,18 @@ export const GET = async (request: NextRequest) => {
 
     collection = collection
       .where('author', '==', user.uid)
-      .orderBy(query.orderBy)
+      .orderBy(query.orderBy, 'desc')
       .limit(query.limit)
   } else if (query.author) {
     collection = collection
       .where('isPublic', '==', true)
       .where('author', '==', query.author)
-      .orderBy(query.orderBy)
+      .orderBy(query.orderBy, 'desc')
       .limit(query.limit)
   } else {
     collection = collection
       .where('isPublic', '==', true)
-      .orderBy(query.orderBy)
+      .orderBy(query.orderBy, 'desc')
       .limit(query.limit)
   }
 
@@ -110,7 +110,7 @@ export const GET = async (request: NextRequest) => {
     return {
       ...data,
       dateCreated: data.dateCreated.toDate(),
-      dateUpdated: data.dateUpdate.toDate(),
+      dateUpdated: data.dateUpdated.toDate(),
     }
   })
 
