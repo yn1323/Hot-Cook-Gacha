@@ -55,6 +55,10 @@ export const RecipeList = ({
     )
   }
 
+  if (recipes.length === 0) {
+    return <Text>レシピはありません。</Text>
+  }
+
   return (
     <Fragment>
       <VStack divider={<Divider />} w="100%">
