@@ -13,6 +13,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Fragment } from 'react'
 import { MaxRecipeShowPerPage } from '@/constants/recipes'
@@ -58,103 +59,105 @@ export const RecipeList = ({
     <Fragment>
       <VStack divider={<Divider />} w="100%">
         {recipes.map((recipe, i) => (
-          <HStack
+          <Link
             key={recipe.recipeId + i}
-            w="100%"
-            h={24}
-            gap={2}
-            _hover={{ cursor: 'pointer', background: '#f9f9f9' }}
-            onClick={() => {
-              router.push(`/recipes/${recipe.recipeId}`)
-            }}
+            style={{ width: '100%' }}
+            href={`/recipes/${recipe.recipeId}`}
           >
-            <Box w={36} h="100%">
-              {recipe.image ? (
-                <Skeleton
-                  isLoaded={!isLoading}
-                  w="100%"
-                  h="100%"
-                  borderRadius={10}
-                >
-                  <Center
-                    w="inherit"
-                    h="inherit"
-                    border="0px solid white"
-                    borderRadius="inherit"
+            <HStack
+              w="100%"
+              h={24}
+              gap={2}
+              _hover={{ cursor: 'pointer', background: '#f9f9f9' }}
+            >
+              <Box w={36} h="100%">
+                {recipe.image ? (
+                  <Skeleton
+                    isLoaded={!isLoading}
+                    w="100%"
+                    h="100%"
+                    borderRadius={10}
                   >
-                    <Image
-                      w="100%"
-                      h="100%"
-                      src={recipe.image}
-                      alt=""
+                    <Center
+                      w="inherit"
+                      h="inherit"
                       border="0px solid white"
-                      borderRadius={10}
-                      objectFit={'cover'}
-                    />
-                  </Center>
-                </Skeleton>
-              ) : (
-                <Skeleton
-                  isLoaded={!isLoading}
-                  w="100%"
-                  h="100%"
-                  borderRadius={10}
-                >
-                  <Center
-                    w="inherit"
-                    h="inherit"
-                    background="rgba(0,0,0,0.2)"
-                    border="0px solid white"
-                    borderRadius="inherit"
+                      borderRadius="inherit"
+                    >
+                      <Image
+                        w="100%"
+                        h="100%"
+                        src={recipe.image}
+                        alt=""
+                        border="0px solid white"
+                        borderRadius={10}
+                        objectFit={'cover'}
+                      />
+                    </Center>
+                  </Skeleton>
+                ) : (
+                  <Skeleton
+                    isLoaded={!isLoading}
+                    w="100%"
+                    h="100%"
+                    borderRadius={10}
                   >
-                    <Text color="white">No Image</Text>
-                  </Center>
-                </Skeleton>
-              )}
-            </Box>
-            {isLoading ? (
-              <SkeletonText
-                w="100%"
-                noOfLines={4}
-                spacing={3}
-                skeletonHeight={3}
-              />
-            ) : (
-              <VStack
-                w="100%"
-                alignItems="flex-start"
-                justifyContent="flex-start"
-                gap={0}
-                h="100%"
-              >
-                <Text
-                  fontWeight="bold"
-                  color="green.700"
-                  textDecor="underline"
-                  noOfLines={1}
+                    <Center
+                      w="inherit"
+                      h="inherit"
+                      background="rgba(0,0,0,0.2)"
+                      border="0px solid white"
+                      borderRadius="inherit"
+                    >
+                      <Text color="white">No Image</Text>
+                    </Center>
+                  </Skeleton>
+                )}
+              </Box>
+              {isLoading ? (
+                <SkeletonText
+                  w="100%"
+                  noOfLines={4}
+                  spacing={3}
+                  skeletonHeight={3}
+                />
+              ) : (
+                <VStack
+                  w="100%"
+                  alignItems="flex-start"
+                  justifyContent="flex-start"
+                  gap={0}
+                  h="100%"
                 >
-                  {recipe.title}
-                </Text>
-                {!hideAuthor && (
-                  <Text color="gray.600" fontSize="xs" mt={1} noOfLines={1}>
-                    by{' '}
-                    {authors.find(({ id }) => id === recipe.author)?.name ??
-                      '詠み人知らず'}
+                  <Text
+                    fontWeight="bold"
+                    color="green.700"
+                    textDecor="underline"
+                    noOfLines={1}
+                  >
+                    {recipe.title}
                   </Text>
-                )}
-                <Text fontSize="sm" noOfLines={2}>
-                  {recipe.ingredients
-                    .map(({ ingredient }) => ingredient)
-                    .join(' ')}
-                </Text>
-                {recipe.tags && recipe.tags.length > 0 && (
-                  <Text fontSize="xs" color="gray.400" noOfLines={1}>
-                    {recipe.tags.join(' / ')}
+                  {!hideAuthor && (
+                    <Text color="gray.600" fontSize="xs" mt={1} noOfLines={1}>
+                      by{' '}
+                      {authors.find(({ id }) => id === recipe.author)?.name ??
+                        '詠み人知らず'}
+                    </Text>
+                  )}
+                  <Text fontSize="sm" noOfLines={2}>
+                    {recipe.ingredients
+                      .map(({ ingredient }) => ingredient)
+                      .join(' ')}
                   </Text>
-                )}
-              </VStack>
-            )}
-          </HStack>
+                  {recipe.tags && recipe.tags.length > 0 && (
+                    <Text fontSize="xs" color="gray.400" noOfLines={1}>
+                      {recipe.tags.join(' / ')}
+                    </Text>
+                  )}
+                </VStack>
+              )}
+            </HStack>
+          </Link>
         ))}
       </VStack>
 

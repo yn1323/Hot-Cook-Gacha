@@ -2,7 +2,8 @@
 
 import { Button } from '@chakra-ui/button'
 import { Box, HStack, Text } from '@chakra-ui/layout'
-import { Center, Icon, Link, VStack } from '@chakra-ui/react'
+import { Center, Icon, VStack } from '@chakra-ui/react'
+import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { AiFillHome } from 'react-icons/ai'
