@@ -48,7 +48,7 @@ export const GachaHistory = ({ gachaHistories }: Props) => {
           </Link>
         </Box>
       ))}
-      {!showMore && (
+      {!showMore && gachaHistories.length < InitialGachaShowNum && (
         <Fragment>
           <Text onClick={() => setShowMore(true)} pb={3} as="button" w="100%">
             もっと見る
