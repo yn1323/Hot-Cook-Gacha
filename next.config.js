@@ -1,8 +1,11 @@
+const withPWA = require('next-pwa')
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+module.exports = withPWA({
+  pwa: {
+    dest: 'public',
+  },
   experimental: {
     serverActions: true,
   },
-}
-
-module.exports = nextConfig
+})
