@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { serverCollection } from '@/firebase/server'
-import { BaseFetch } from '@/page/_src/api'
+import { BaseFetch } from '@/src/api/fetch'
+import { serverCollection } from '@/src/firebase/server'
 
 type Author = {
   name: string

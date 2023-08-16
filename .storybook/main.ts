@@ -2,7 +2,10 @@ import type { StorybookConfig } from '@storybook/nextjs'
 import path from 'path'
 
 const config: StorybookConfig = {
-  stories: ['../app/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    '../app/**/*.stories.@(js|jsx|ts|tsx)',
+    '../components/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -28,14 +31,11 @@ const config: StorybookConfig = {
     }
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@/component': path.resolve(__dirname, '../app/_components'),
-      '@/page': path.resolve(__dirname, '../app/_pages'),
-      '@/config': path.resolve(__dirname, '../app/_configs'),
-      '@/hooks': path.resolve(__dirname, '../app/_src/hooks'),
-      '@/constants': path.resolve(__dirname, '../app/_src/constants'),
-      '@/helpers': path.resolve(__dirname, '../app/_src/helpers'),
-      '@/services': path.resolve(__dirname, '../app/_services'),
-      '@/firebase': path.resolve(__dirname, '../app/_src/firebase'),
+      '@/components': path.resolve(__dirname, '../components'),
+      '@/config': path.resolve(__dirname, '../configs'),
+      '@/src': path.resolve(__dirname, '../src'),
+      '@/services': path.resolve(__dirname, '../services'),
+      '@/page': path.resolve(__dirname, '../app'),
     }
     return config
   },

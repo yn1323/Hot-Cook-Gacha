@@ -20,13 +20,10 @@
       }
     ],
     "paths": {
-      "@/component/*": ["./app/_components/*"],
-      "@/config/*": ["./app/_configs/*"],
-      "@/firebase/*": ["./app/_src/firebase/*"],
-      "@/hooks/*": ["./app/_src/hooks/*"],
-      "@/constants/*": ["./app/_src/constants/*"],
-      "@/helpers/*": ["./app/_src/helpers/*"],
-      "@/services/*": ["./app/_services/*"],
+      "@/components/*": ["./components/*"],
+      "@/config/*": ["./configs/*"],
+      "@/src/*": ["./src/*"],
+      "@/services/*": ["./services/*"],
       "@/page/*": ["./app/*"]
     }
   },

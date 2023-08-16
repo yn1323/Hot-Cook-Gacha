@@ -3,8 +3,8 @@
 import { VStack } from '@chakra-ui/react'
 import { useSearchParams } from 'next/navigation'
 import { ComponentProps } from 'react'
-import { RecipeList } from '@/component/feature/recipe/RecipeList'
-import { RecipeSearchForm } from '@/component/feature/recipe/RecipeSearchForm'
+import { RecipeList } from '@/components/feature/recipe/RecipeList'
+import { RecipeSearchForm } from '@/components/feature/recipe/RecipeSearchForm'
 
 type Props = Pick<ComponentProps<typeof RecipeList>, 'authors' | 'recipes'>
 

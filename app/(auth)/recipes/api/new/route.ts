@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { serverCollection } from '@/firebase/server'
 import { RecipeType } from '@/page/(auth)/recipes/api/route'
-import { BaseFetch } from '@/page/_src/api'
+import { BaseFetch } from '@/src/api/fetch'
+import { serverCollection } from '@/src/firebase/server'
 
 export type GetNewRecipes = BaseFetch & {
   response: {

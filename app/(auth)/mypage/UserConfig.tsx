@@ -3,7 +3,7 @@
 import { Text, VStack } from '@chakra-ui/react'
 import { useSearchParams } from 'next/navigation'
 import { ComponentProps } from 'react'
-import { UserConfigForm } from '@/component/feature/userConfig/UserConfigForm'
+import { UserConfigForm } from '@/components/feature/userConfig/UserConfigForm'
 
 type Props = ComponentProps<typeof UserConfigForm>
 

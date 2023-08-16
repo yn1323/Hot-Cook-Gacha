@@ -1,9 +1,9 @@
-import { NotFound } from '@/component/feature/notifications/NotFound'
+import { NotFound } from '@/components/feature/notifications/NotFound'
 import {
   SearchQueryParams,
   recipeSearchFormAction,
-} from '@/component/feature/recipe/RecipeSearchForm/action'
-import { Animation } from '@/component/layout/Animation'
+} from '@/components/feature/recipe/RecipeSearchForm/action'
+import { Animation } from '@/components/layout/Animation'
 import SearchForm from '@/page/(auth)/recipes/search/form'
 
 const Search = async ({

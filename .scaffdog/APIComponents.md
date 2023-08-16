@@ -1,6 +1,6 @@
 ---
 name: "API Component"
-root: "./app/_components"
+root: "./components"
 output: []
 ignore: []
 questions:

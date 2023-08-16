@@ -1,5 +1,5 @@
-import { Complete as CompleteNotification } from '@/component/feature/notifications/Complete'
-import { Animation } from '@/component/layout/Animation'
+import { Complete as CompleteNotification } from '@/components/feature/notifications/Complete'
+import { Animation } from '@/components/layout/Animation'
 
 const Complete = async () => {
   return (

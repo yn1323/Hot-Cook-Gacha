@@ -1,10 +1,10 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { MaxRecipeShowPerPage } from '@/constants/recipes'
-import { recipeSchemas } from '@/constants/validations'
-import { getServerAuth, serverCollection } from '@/firebase/server'
-import { BaseFetch } from '@/page/_src/api'
+import { BaseFetch } from '@/src/api/fetch'
+import { MaxRecipeShowPerPage } from '@/src/constants/recipes'
+import { recipeSchemas } from '@/src/constants/validations'
+import { getServerAuth, serverCollection } from '@/src/firebase/server'
 
 type Comment = {
   author: string

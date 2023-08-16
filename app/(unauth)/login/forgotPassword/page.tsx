@@ -1,6 +1,6 @@
-import { ForgotPasswordForm } from '@/component/feature/login/ForgotPasswordForm'
-import { Animation } from '@/component/layout/Animation'
-import { CenterBox } from '@/component/layout/CenterBox'
+import { ForgotPasswordForm } from '@/components/feature/login/ForgotPasswordForm'
+import { Animation } from '@/components/layout/Animation'
+import { CenterBox } from '@/components/layout/CenterBox'
 
 const ForgotPassword = () => {
   return (

@@ -1,4 +1,4 @@
-import { PageLoading } from '@/component/layout/PageLoading'
+import { PageLoading } from '@/components/layout/PageLoading'
 
 const Loading = () => <PageLoading />
 

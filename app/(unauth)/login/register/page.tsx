@@ -1,6 +1,6 @@
-import { RegisterForm } from '@/component/feature/login/RegisterForm'
-import { Animation } from '@/component/layout/Animation'
-import { CenterBox } from '@/component/layout/CenterBox'
+import { RegisterForm } from '@/components/feature/login/RegisterForm'
+import { Animation } from '@/components/layout/Animation'
+import { CenterBox } from '@/components/layout/CenterBox'
 
 const LoginRegister = () => {
   return (

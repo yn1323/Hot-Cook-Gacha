@@ -1,11 +1,11 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { recipeSchemas } from '@/constants/validations'
-import { getServerAuth, serverCollection } from '@/firebase/server'
 import { RecipeType } from '@/page/(auth)/recipes/api/route'
-import { BaseFetch } from '@/page/_src/api'
-import { supabase, supabaseEnv } from '@/page/_src/supabase/server'
+import { BaseFetch } from '@/src/api/fetch'
+import { recipeSchemas } from '@/src/constants/validations'
+import { getServerAuth, serverCollection } from '@/src/firebase/server'
+import { supabase, supabaseEnv } from '../../../../../src/supabase/server'
 
 // TODO: トランザクション
 
