@@ -4,13 +4,14 @@ import { GachaHistory } from '@/components/feature/gacha/RecentGachaHistory/Gach
 import { Header } from '@/components/feature/gacha/RecentGachaHistory/Header'
 import { GetGachaHistory } from '@/page/(auth)/gacha/api/history/route'
 import { serverFetch } from '@/src/api/fetch'
+import { RevalidateTags } from '@/src/api/tags'
 
 async function initialize() {
   const { gachaHistories } = await serverFetch<GetGachaHistory>(
     `/gacha/api/history`,
     {
       next: {
-        tags: ['gacha'],
+        tags: [RevalidateTags.gacha],
       },
     }
   )

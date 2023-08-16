@@ -5,13 +5,14 @@ import { GetAuthor } from '@/page/(auth)/auth/authors/[uid]/route'
 import { GetRecipe } from '@/page/(auth)/recipes/api/[recipeId]/route'
 import { GetUser } from '@/page/(auth)/users/[userId]/route'
 import { serverFetch } from '@/src/api/fetch'
+import { RevalidateTags } from '@/src/api/tags'
 
 async function initialize(recipeId: string) {
   const userFetch = serverFetch<GetUser>('/auth/self')
   const recipeFetch = serverFetch<GetRecipe>(`/recipes/api/${recipeId}`, {
     query: {},
     next: {
-      tags: ['recipe'],
+      tags: [RevalidateTags.recipe],
     },
   })
 

@@ -2,7 +2,6 @@
 
 import { Button } from '@chakra-ui/react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Animation } from '@/components/layout/Animation'
 import { CenterBox } from '@/components/layout/CenterBox'
 import shockedImage from './images/shocked.png'
@@ -16,11 +15,13 @@ export const Sorry = () => {
         <p style={{ width: 'max-content' }}>
           しばらく経ってから再度試してください。
         </p>
-        <Link href={window.location.href}>
-          <Button colorScheme="green" mt={4}>
-            戻る
-          </Button>
-        </Link>
+        <Button
+          colorScheme="green"
+          mt={4}
+          onClick={() => (window.location.href = '/dashboard')}
+        >
+          戻る
+        </Button>
       </CenterBox>
     </Animation>
   )

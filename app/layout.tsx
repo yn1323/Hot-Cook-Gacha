@@ -1,5 +1,8 @@
 import { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
+import { Suspense } from 'react'
+import { PageLoading } from '@/components/layout/PageLoading'
+import { CheckLogin } from '@/components/layout/wrapper/CheckLogin'
 import { Providers } from '@/config/Providers'
 
 const font = Noto_Sans_JP({
@@ -23,7 +26,11 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={font.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Suspense fallback={<PageLoading />}>
+            <CheckLogin>{children}</CheckLogin>
+          </Suspense>
+        </Providers>
       </body>
     </html>
   )
