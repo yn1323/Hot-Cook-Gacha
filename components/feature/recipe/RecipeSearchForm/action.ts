@@ -3,6 +3,7 @@
 import { GetAuthors } from '@/page/(auth)/auth/authors/route'
 import { GetRecipes } from '@/page/(auth)/recipes/api/route'
 import { serverFetch } from '@/src/api/fetch'
+import { RevalidateTags } from '@/src/api/tags'
 
 export type SearchQueryParams = GetRecipes['requestOptions']['query']
 
@@ -12,7 +13,7 @@ export async function recipeSearchFormAction(params: SearchQueryParams) {
       ...params,
     },
     next: {
-      tags: ['recipe'],
+      tags: [RevalidateTags.recipe],
     },
   })
 
