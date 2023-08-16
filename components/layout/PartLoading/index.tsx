@@ -7,7 +7,7 @@ type Props = ComponentProps<typeof Box>
 
 export const PartLoading = (props: Props) => {
   return (
-    <Box h={props.h ?? '20vh'}>
+    <Box h={props.h ?? '50vh'}>
       <Center h="100%">
         <Spinner
           thickness="4px"
