@@ -9,7 +9,6 @@ import {
   HStack,
   Spacer,
   StackDivider,
-  Tag,
   useDisclosure,
 } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -32,6 +31,7 @@ import { PrepTimeSelect } from '@/components/form/Recipe/PrepTimeSelect'
 import { RecipeTypeSelect } from '@/components/form/Recipe/RecipeTypeSelect'
 import { ServingSelect } from '@/components/form/Recipe/ServingSelect'
 import { StatusInput } from '@/components/form/Recipe/StatusInput'
+import { Tag } from '@/components/form/Recipe/Tag'
 import { TitleInput } from '@/components/form/Recipe/TitleInput'
 import { recipeSchemas } from '@/src/constants/validations'
 import { useCustomToast } from '@/src/hooks/ui/useCustomToast'
