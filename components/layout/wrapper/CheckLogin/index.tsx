@@ -1,6 +1,7 @@
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { Fragment, ReactNode } from 'react'
+import { ReactNode } from 'react'
+import { ClientCheckLogin } from '@/components/layout/wrapper/CheckLogin/ClientCheckLogin'
 import { PostLoginCheck } from '@/page/api/auth/isAuthenticated/route'
 import { serverFetch } from '@/src/api/fetch'
 
@@ -8,13 +9,13 @@ import { serverFetch } from '@/src/api/fetch'
 const nonAuthPath = ['/', '/login/register', '/login/forgotPassword']
 
 const accountExistCheck = async () => {
-  const { isAuthenticated } = await serverFetch<PostLoginCheck>(
+  const userInfo = await serverFetch<PostLoginCheck>(
     '/api/auth/isAuthenticated',
     { method: 'POST' }
   )
 
   return {
-    isAuthenticated,
+    ...userInfo,
     isDev: !!process.env.NEXT_PUBLIC_IS_LOCAL,
   }
 }
@@ -24,7 +25,7 @@ type Props = {
 }
 
 export const CheckLogin = async ({ children }: Props) => {
-  const { isAuthenticated, isDev } = await accountExistCheck()
+  const { isAuthenticated, uid, isDev } = await accountExistCheck()
   const headersList = headers()
   const url = new URL(headersList.get('x-url') ?? '')
 
@@ -32,7 +33,7 @@ export const CheckLogin = async ({ children }: Props) => {
 
   // HMR中は保存ごとのLayoutのローディングが走るためreturnさせる
   if (isDev) {
-    return <Fragment>{children}</Fragment>
+    return <ClientCheckLogin uid={uid}>{children}</ClientCheckLogin>
   }
 
   if (isAuthenticated && nonAuthPath.includes(pathname)) {
@@ -43,5 +44,5 @@ export const CheckLogin = async ({ children }: Props) => {
     return redirect('/')
   }
 
-  return <Fragment>{children}</Fragment>
+  return <ClientCheckLogin uid={uid}>{children}</ClientCheckLogin>
 }
