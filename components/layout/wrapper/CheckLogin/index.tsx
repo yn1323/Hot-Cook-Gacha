@@ -1,0 +1,41 @@
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { Fragment, ReactNode } from 'react'
+import { PostLoginCheck } from '@/page/api/auth/isAuthenticated/route'
+import { serverFetch } from '@/src/api/fetch'
+
+// ログインなしで表示するパス
+const nonAuthPath = ['/', '/login/register', '/login/forgotPassword']
+
+const accountExistCheck = async () => {
+  const { isAuthenticated } = await serverFetch<PostLoginCheck>(
+    '/api/auth/isAuthenticated',
+    { method: 'POST' }
+  )
+
+  return {
+    isAuthenticated,
+  }
+}
+
+type Props = {
+  children: ReactNode
+}
+
+export const CheckLogin = async ({ children }: Props) => {
+  const { isAuthenticated } = await accountExistCheck()
+  const headersList = headers()
+  const url = new URL(headersList.get('x-url') ?? '')
+
+  const pathname = url.pathname
+
+  if (isAuthenticated && nonAuthPath.includes(pathname)) {
+    return redirect('/dashboard')
+  }
+
+  if (!isAuthenticated && !nonAuthPath.includes(pathname)) {
+    return redirect('/')
+  }
+
+  return <Fragment>{children}</Fragment>
+}
