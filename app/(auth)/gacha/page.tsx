@@ -1,12 +1,12 @@
-import { GachaForm } from '@/component/feature/gacha/GachaForm'
+import { GachaForm } from '@/components/feature/gacha/GachaForm'
 import {
   SearchQueryParams,
   gachaRandomGetFormAction,
   getRecipesFromIdsAction,
-} from '@/component/feature/gacha/GachaForm/action'
-import { GachaResult } from '@/component/feature/gacha/GachaResult'
-import { Animation } from '@/component/layout/Animation'
-import { Center } from '@/component/layout/Center'
+} from '@/components/feature/gacha/GachaForm/action'
+import { GachaResult } from '@/components/feature/gacha/GachaResult'
+import { Animation } from '@/components/layout/Animation'
+import { Center } from '@/components/layout/Center'
 
 const Gacha = async ({ searchParams }: { searchParams: SearchQueryParams }) => {
   const { recipes } = await getRecipesFromIdsAction(searchParams)

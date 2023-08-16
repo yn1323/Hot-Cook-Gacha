@@ -1,10 +1,10 @@
-import { NotFound } from '@/component/feature/notifications/NotFound'
-import { RecipeDetail } from '@/component/feature/recipe/RecipeDetail'
-import { Animation } from '@/component/layout/Animation'
+import { NotFound } from '@/components/feature/notifications/NotFound'
+import { RecipeDetail } from '@/components/feature/recipe/RecipeDetail'
+import { Animation } from '@/components/layout/Animation'
 import { GetAuthor } from '@/page/(auth)/auth/authors/[uid]/route'
 import { GetRecipe } from '@/page/(auth)/recipes/api/[recipeId]/route'
 import { GetUser } from '@/page/(auth)/users/[userId]/route'
-import { serverFetch } from '@/page/_src/api'
+import { serverFetch } from '@/src/api/fetch'
 
 async function initialize(recipeId: string) {
   const userFetch = serverFetch<GetUser>('/auth/self')

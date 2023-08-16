@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerAuth } from '@/firebase/server'
 import { GetUser } from '@/page/(auth)/users/[userId]/route'
-import { BaseFetch, serverFetch } from '@/page/_src/api'
+import { BaseFetch, serverFetch } from '@/src/api/fetch'
+import { getServerAuth } from '@/src/firebase/server'
 
 export type User = {
   name: string

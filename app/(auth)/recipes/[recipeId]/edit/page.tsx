@@ -1,14 +1,14 @@
-import { NotFound } from '@/component/feature/notifications/NotFound'
-import { RecipeForm } from '@/component/feature/recipe/RecipeForm'
+import { NotFound } from '@/components/feature/notifications/NotFound'
+import { RecipeForm } from '@/components/feature/recipe/RecipeForm'
 import {
   recipeDeleteFormAction,
   recipePutFormAction,
-} from '@/component/feature/recipe/RecipeForm/action'
-import { Animation } from '@/component/layout/Animation'
+} from '@/components/feature/recipe/RecipeForm/action'
+import { Animation } from '@/components/layout/Animation'
 import { GetAuthor } from '@/page/(auth)/auth/authors/[uid]/route'
 import { GetRecipe } from '@/page/(auth)/recipes/api/[recipeId]/route'
 import { GetUser } from '@/page/(auth)/users/[userId]/route'
-import { serverFetch } from '@/page/_src/api'
+import { serverFetch } from '@/src/api/fetch'
 
 async function initialize(recipeId: string) {
   const userFetch = serverFetch<GetUser>('/auth/self')

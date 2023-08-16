@@ -1,13 +1,13 @@
-import { userConfigFormAction } from '@/component/feature/userConfig/UserConfigForm/action'
-import { Animation } from '@/component/layout/Animation'
-import { Center } from '@/component/layout/Center'
+import { userConfigFormAction } from '@/components/feature/userConfig/UserConfigForm/action'
+import { Animation } from '@/components/layout/Animation'
+import { Center } from '@/components/layout/Center'
 import { GetSelf } from '@/page/(auth)/auth/self/route'
 import { Logout } from '@/page/(auth)/mypage/_Logout'
 import Recipes from '@/page/(auth)/mypage/Recipes'
 import UserConfig from '@/page/(auth)/mypage/UserConfig'
 import { GetRecipes } from '@/page/(auth)/recipes/api/route'
-import { serverFetch } from '@/page/_src/api'
-import { RevalidateTags } from '@/page/_src/api/tags'
+import { serverFetch } from '@/src/api/fetch'
+import { RevalidateTags } from '@/src/api/tags'
 
 async function initialize() {
   const userFetch = serverFetch<GetSelf>('/auth/self')

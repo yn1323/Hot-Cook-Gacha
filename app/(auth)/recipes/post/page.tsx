@@ -1,6 +1,6 @@
-import { RecipeForm } from '@/component/feature/recipe/RecipeForm'
-import { recipePostFormAction } from '@/component/feature/recipe/RecipeForm/action'
-import { Animation } from '@/component/layout/Animation'
+import { RecipeForm } from '@/components/feature/recipe/RecipeForm'
+import { recipePostFormAction } from '@/components/feature/recipe/RecipeForm/action'
+import { Animation } from '@/components/layout/Animation'
 
 const Post = () => {
   return (

@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerAuth, serverCollection } from '@/firebase/server'
-import { BaseFetch } from '@/page/_src/api'
+import { BaseFetch } from '@/src/api/fetch'
+import { getServerAuth, serverCollection } from '@/src/firebase/server'
 
 export type GetGachaHistory = BaseFetch & {
   response: {

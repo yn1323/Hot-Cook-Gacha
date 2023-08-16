@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
-import { RecentGachaHistory } from '@/component/feature/gacha/RecentGachaHistory'
-import { RecentRecipes } from '@/component/feature/recipe/RecentRecipes'
-import { Animation } from '@/component/layout/Animation'
+import { RecentGachaHistory } from '@/components/feature/gacha/RecentGachaHistory'
+import { RecentRecipes } from '@/components/feature/recipe/RecentRecipes'
+import { Animation } from '@/components/layout/Animation'
 
 const Dashboard = () => {
   return (

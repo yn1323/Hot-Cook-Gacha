@@ -1,6 +1,6 @@
 'use client'
 
-// import { NotFound } from '@/component/feature/notifications/NotFound'
+// import { NotFound } from '@/components/feature/notifications/NotFound'
 
 export default function RootNotFound() {
   // const router = useRouter()

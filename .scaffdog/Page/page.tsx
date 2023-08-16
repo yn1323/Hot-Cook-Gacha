@@ -1,4 +1,4 @@
-import { Animation } from '@/component/layout/Animation'
+import { Animation } from '@/components/layout/Animation'
 import { GetSelf } from '@/page/(auth)/auth/self/route'
 import { serverFetch } from '@/page/_src/api'
 

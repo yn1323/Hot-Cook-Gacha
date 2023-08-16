@@ -1,7 +1,7 @@
-import { SpMenu } from '@/component/layout/SpMenu'
+import { SpMenu } from '@/components/layout/SpMenu'
 import { GetSelf } from '@/page/(auth)/auth/self/route'
 import { PostUser } from '@/page/(auth)/users/[userId]/route'
-import { serverFetch } from '@/page/_src/api'
+import { serverFetch } from '@/src/api/fetch'
 
 async function accountExistCheck() {
   const { user, isUserExistInDb } = await serverFetch<GetSelf>('/auth/self')

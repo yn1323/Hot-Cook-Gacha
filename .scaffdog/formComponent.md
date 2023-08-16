@@ -1,6 +1,6 @@
 ---
 name: "FormComponent"
-root: "./app/_components"
+root: "./components"
 output: []
 ignore: []
 questions:

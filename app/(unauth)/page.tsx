@@ -1,6 +1,6 @@
-import { LoginForm } from '@/component/feature/login/LoginForm'
-import { Animation } from '@/component/layout/Animation'
-import { CenterBox } from '@/component/layout/CenterBox'
+import { LoginForm } from '@/components/feature/login/LoginForm'
+import { Animation } from '@/components/layout/Animation'
+import { CenterBox } from '@/components/layout/CenterBox'
 
 const Home = () => {
   return (

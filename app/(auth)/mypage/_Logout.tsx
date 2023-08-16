@@ -2,7 +2,7 @@
 
 import { Box, Button } from '@chakra-ui/react'
 import { BiLogOut } from 'react-icons/bi'
-import { useSession } from '@/hooks/auth/useSession'
+import { useSession } from '@/src/hooks/auth/useSession'
 
 export const Logout = () => {
   const { logout } = useSession()
