@@ -43,6 +43,7 @@ type Props = {
   defaultValues?: SchemaType
   isEdit?: boolean
   recipeId?: string
+  isLoading?: boolean
   onCreate?: typeof recipePostFormAction
   onUpdate?: typeof recipePutFormAction
   onDelete?: typeof recipeDeleteFormAction
@@ -53,6 +54,7 @@ export const RecipeForm = ({
   defaultValues,
   isEdit,
   recipeId,
+  isLoading = false,
   onCreate,
   onUpdate,
   onDelete,
@@ -92,16 +94,6 @@ export const RecipeForm = ({
 
   const handleAdminCreate = async (data: SchemaType) => {
     const result = onAdminCreate && onAdminCreate(data)
-    if (result) {
-      successToast({
-        title: 'レシピの投稿が完了しました。',
-      })
-      router.push(`/admin/recipe`)
-    } else {
-      errorToast({
-        title: 'レシピの投稿に失敗しました。',
-      })
-    }
   }
 
   const handleUpdate = async (data: SchemaType) => {
@@ -234,7 +226,7 @@ export const RecipeForm = ({
               colorScheme="green"
               size="lg"
               type="submit"
-              isLoading={isPending}
+              isLoading={isLoading || isPending}
             >
               {isEdit
                 ? 'レシピを更新する'

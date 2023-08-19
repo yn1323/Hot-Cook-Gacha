@@ -54,7 +54,7 @@ export const RecipeDetail = ({ recipe, isEditable = false }: Props) => {
           <Button
             colorScheme="green"
             onClick={() => {
-              router.push(`/recipes/${recipe.recipeId}/edit`)
+              router.push(`/recipes/${recipe.recipeId}/edit`, { scroll: true })
             }}
           >
             編集する

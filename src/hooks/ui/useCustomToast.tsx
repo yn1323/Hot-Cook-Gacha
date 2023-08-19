@@ -4,7 +4,7 @@ import { useCallback } from 'react'
 export const useCustomToast = () => {
   const toast = useToast({
     position: 'top-right',
-    duration: 5000,
+    duration: 2000,
     isClosable: true,
   })
 

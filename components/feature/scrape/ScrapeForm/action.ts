@@ -3,21 +3,66 @@
 import console from 'console'
 import process from 'process'
 import { SchemaType } from '@/components/feature/recipe/RecipeForm'
-import { debugCollection, serverCollection } from '@/src/firebase/server'
+import {
+  debugCollection,
+  serverCollection,
+  serverProdCollection,
+} from '@/src/firebase/server'
 import { sleep } from '@/src/helpers/async'
 
 export type AdminPostSchema = SchemaType
 
 export async function registerRecipeFormAction(
-  schema: AdminPostSchema & { uid?: string; recipeId?: string }
+  schema: AdminPostSchema,
+  option: { uid?: string; recipeId?: string }
 ) {
-  // 仮登録されたレシピをdoneに変更
+  console.log('aaaaa')
+  let error = false
+  try {
+    // 開発環境に登録
+    await serverCollection
+      .doc('search')
+      .collection('recipes')
+      .doc(option.recipeId ?? '')
+      .set({
+        ...schema,
+        author: option.uid,
+        recipeId: option.recipeId,
+        dateCreated: new Date(),
+        dateUpdated: new Date(),
+        version: 1,
+        comment: [],
+        like: 0,
+        random: Math.random(),
+      })
 
-  // 開発環境に登録
+    // 本番環境に登録
+    await serverProdCollection
+      .doc('search')
+      .collection('recipes')
+      .doc(option.recipeId ?? '')
+      .set({
+        ...schema,
+        author: option.uid,
+        recipeId: option.recipeId,
+        dateCreated: new Date(),
+        dateUpdated: new Date(),
+        version: 1,
+        comment: [],
+        like: 0,
+        random: Math.random(),
+      })
 
-  // 本番環境に登録
+    // 仮登録されたレシピをdoneに変更
+    await skipRecipeAction(option.recipeId ?? '')
+  } catch (e) {
+    console.error(e)
+    error = true
+  }
 
-  return { status: 'ok' }
+  return {
+    ok: !error,
+  }
 }
 
 export async function skipRecipeAction(recipeId: string) {
@@ -102,9 +147,9 @@ export async function getPendingRecipe() {
     image: '',
     genre: '',
     type: '',
-    prepTime: 30,
+    prepTime: parseInt(data.cooktime),
 
-    servings: data.quantity.match(/(\d+)/)[1],
+    servings: `${data.quantity.match(/(\d+)/)[1]}`,
     ingredients: data.materials.map((ingredient: any) => ({
       ingredient: ingredient.name,
       amount: ingredient.quantity,
