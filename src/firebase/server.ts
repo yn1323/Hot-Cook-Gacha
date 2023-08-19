@@ -19,6 +19,6 @@ export const serverCollection = admin
 
 export const debugCollection = admin
   .firestore(app)
-  .collection(process.env.DEV_SCRAPE_FIRESTORE_COLLECTION ?? '')
+  .collection(process.env?.DEV_SCRAPE_FIRESTORE_COLLECTION ?? 'something')
 
 export const serverProdCollection = admin.firestore(app).collection('hot-cook')
