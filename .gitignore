@@ -46,3 +46,5 @@ build-storybook.log
 
 # env
 .env
+
+pulic/sw.js

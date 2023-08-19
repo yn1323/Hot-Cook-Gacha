@@ -6,7 +6,7 @@ import {
   FormLabel,
   Select,
 } from '@chakra-ui/react'
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { RequiredBadge } from '@/components/form/Recipe/RequiredBadge'
 import { ServingOptions } from '@/src/constants/recipes'
@@ -21,10 +21,6 @@ export const ServingSelect = ({ required }: Props) => {
     formState: { errors },
     setValue,
   } = useFormContext<{ servings: string }>()
-
-  useEffect(() => {
-    setValue('servings', '2')
-  }, [setValue])
 
   const errorMessage = useMemo(
     () => errors.servings?.message,

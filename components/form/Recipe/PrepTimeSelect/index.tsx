@@ -29,7 +29,7 @@ export const PrepTimeSelect = ({ required }: Props) => {
   return (
     <FormControl id="prepTime" isInvalid={!!errors.prepTime}>
       <FormLabel>
-        準備時間（ホットクックを除く）
+        調理時間
         {required && <RequiredBadge ml={4} />}
       </FormLabel>
       <Select {...register('prepTime', { valueAsNumber: true })}>

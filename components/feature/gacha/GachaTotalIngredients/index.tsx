@@ -27,6 +27,8 @@ export const GachaTotalIngredients = ({ recipes, term }: Props) => {
     [recipes]
   )
 
+  console.log('totalIngredients', totalIngredients)
+
   return (
     <Box w="100%" mt={4}>
       <Text fontSize="lg" as="b" w="100%">

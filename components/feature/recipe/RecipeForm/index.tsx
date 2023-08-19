@@ -43,18 +43,22 @@ type Props = {
   defaultValues?: SchemaType
   isEdit?: boolean
   recipeId?: string
+  isLoading?: boolean
   onCreate?: typeof recipePostFormAction
   onUpdate?: typeof recipePutFormAction
   onDelete?: typeof recipeDeleteFormAction
+  onAdminCreate?: (data: SchemaType) => void
 }
 
 export const RecipeForm = ({
   defaultValues,
   isEdit,
   recipeId,
+  isLoading = false,
   onCreate,
   onUpdate,
   onDelete,
+  onAdminCreate,
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { errorToast, successToast } = useCustomToast()
@@ -88,25 +92,43 @@ export const RecipeForm = ({
   })
   const router = useRouter()
 
+  const handleAdminCreate = async (data: SchemaType) => {
+    const result = onAdminCreate && onAdminCreate(data)
+  }
+
+  const handleUpdate = async (data: SchemaType) => {
+    const result = onUpdate && (await onUpdate(data, recipeId ?? ''))
+    if (result) {
+      successToast({
+        title: 'レシピの更新が完了しました。',
+      })
+      router.push(`/recipes/${recipeId}`)
+    } else {
+      errorToast({
+        title: 'レシピの更新に失敗しました。',
+      })
+    }
+  }
+
+  const handleCreate = async (data: SchemaType) => {
+    const result = onCreate && onCreate(data)
+    if (result) {
+      router.push('/recipes/complete')
+    } else {
+      errorToast({
+        title: 'レシピの投稿に失敗しました。',
+      })
+    }
+  }
+
   const submitHandler = (data: SchemaType) => {
     startTransition(async () => {
-      const result = isEdit
-        ? onUpdate && (await onUpdate(data, recipeId ?? ''))
-        : onCreate && (await onCreate(data))
-
-      if (result) {
-        if (isEdit) {
-          successToast({
-            title: 'レシピの更新が完了しました。',
-          })
-          router.push(`/recipes/${recipeId}`)
-        } else {
-          router.push('/recipes/complete')
-        }
+      if (isEdit) {
+        await handleUpdate(data)
+      } else if (onAdminCreate) {
+        await handleAdminCreate(data)
       } else {
-        errorToast({
-          title: 'レシピの投稿に失敗しました。',
-        })
+        await handleCreate(data)
       }
     })
   }
@@ -204,9 +226,13 @@ export const RecipeForm = ({
               colorScheme="green"
               size="lg"
               type="submit"
-              isLoading={isPending}
+              isLoading={isLoading || isPending}
             >
-              {isEdit ? 'レシピを更新する' : 'レシピを投稿する'}
+              {isEdit
+                ? 'レシピを更新する'
+                : onAdminCreate
+                ? 'レシピを投稿して次へ'
+                : 'レシピを投稿する'}
             </Button>
           </HStack>
         </form>
