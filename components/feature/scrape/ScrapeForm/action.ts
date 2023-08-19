@@ -1,16 +1,38 @@
 'use server'
 
 import console from 'console'
+import process from 'process'
 import { SchemaType } from '@/components/feature/recipe/RecipeForm'
 import { debugCollection, serverCollection } from '@/src/firebase/server'
 import { sleep } from '@/src/helpers/async'
 
-type PostSchema = SchemaType & {
-  recipeId: string
-  author?: string
+export type AdminPostSchema = SchemaType
+
+export async function registerRecipeFormAction(
+  schema: AdminPostSchema & { uid?: string; recipeId?: string }
+) {
+  // 仮登録されたレシピをdoneに変更
+
+  // 開発環境に登録
+
+  // 本番環境に登録
+
+  return { status: 'ok' }
 }
 
-export async function registerRecipeFormAction(url: string) {
+export async function skipRecipeAction(recipeId: string) {
+  await debugCollection
+    .doc('recipe')
+    .collection('index')
+    .doc(recipeId)
+    .update({ done: true })
+
+  await debugCollection
+    .doc('recipe')
+    .collection('detail')
+    .doc(recipeId)
+    .update({ done: true })
+
   return { status: 'ok' }
 }
 
@@ -39,6 +61,14 @@ export async function getPendingRecipe() {
     return {}
   }
   const data: any = { ...snapshot.docs[0].data(), id: snapshot.docs[0].id }
+
+  const indexData = await debugCollection
+    .doc('recipe')
+    .collection('index')
+    .doc(data.id)
+    .get()
+
+  const index = indexData.data()
 
   const methods = data.methods
     .filter((method: any) => !Number.isNaN(method.orderNumber))
@@ -84,17 +114,17 @@ export async function getPendingRecipe() {
     })),
 
     preDirections: methods.preDirections.map((text: any) => ({
-      text: text as string,
+      direction: text as string,
       image: '',
     })),
 
     hotcookDirections: methods.hotcookDirections.map((text: any) => ({
-      text: text as string,
+      direction: text as string,
       image: '',
     })),
 
     postDirections: methods.postDirections.map((text: any) => ({
-      text: text as string,
+      direction: text as string,
       image: '',
     })),
 
@@ -104,10 +134,18 @@ export async function getPendingRecipe() {
 
   return {
     recipe: convertedData,
+    options: {
+      url: `${process.env.NEXT_PUBLIC_RECIPE_URL}/${index?.modelName ?? ''}/${
+        index?.code ?? ''
+      }`,
+      recipeId: data.id,
+    },
   }
 }
 
-export async function postRecipeFormAction(schema: PostSchema) {
+export async function postRecipeFormAction(
+  schema: AdminPostSchema & { recipeId: string }
+) {
   const res = await serverCollection
     .doc('search')
     .collection('recipes')
@@ -177,7 +215,10 @@ const fetchAndRegisterIndex = async () => {
   const res = await html.json()
   const recipes: any[] = res.recipes
   const add = (recipe: any) => {
-    debugCollection.doc('recipe').collection('index').add(recipe)
+    debugCollection
+      .doc('recipe')
+      .collection('index')
+      .add({ ...recipe, done: false })
   }
 
   await Promise.all(recipes.map(recipe => add(recipe)))

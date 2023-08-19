@@ -37,7 +37,7 @@ const Icons = [
         {
           label: '管理者向け',
           icon: BsFillKeyFill,
-          link: '/admin/scrape',
+          link: '/admin/recipe',
         },
       ]
     : []),

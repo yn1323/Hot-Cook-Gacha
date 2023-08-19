@@ -3,26 +3,31 @@ import {
   countRestRecipe,
   getPendingRecipe,
   registerRecipeFormAction,
+  skipRecipeAction,
 } from '@/components/feature/scrape/ScrapeForm/action'
 import { Animation } from '@/components/layout/Animation'
 
 async function initialize() {
   const { restCount } = await countRestRecipe()
-  const { recipe } = await getPendingRecipe()
-  return { restCount, recipe }
+  const { recipe, options } = await getPendingRecipe()
+
+  return { restCount, recipe, options }
 }
 
 const Scrape = async () => {
-  const { restCount, recipe } = await initialize()
   if (!process.env.NEXT_PUBLIC_IS_LOCAL) return null
+
+  const { restCount, recipe, options } = await initialize()
 
   return (
     <Animation>
-      <span>ホットクックを自動でスクレイピングします</span>
       <ScrapeForm
         onRegister={registerRecipeFormAction}
+        onSkip={skipRecipeAction}
         restCount={restCount}
         recipe={recipe}
+        url={options?.url ?? ''}
+        recipeId={options?.recipeId ?? ''}
       />
     </Animation>
   )
