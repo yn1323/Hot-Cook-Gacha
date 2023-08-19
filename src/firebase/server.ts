@@ -1,5 +1,5 @@
 import admin from 'firebase-admin'
-import { type App, cert } from 'firebase-admin/app'
+import { cert, type App } from 'firebase-admin/app'
 
 const app: App =
   admin.apps.length === 0
@@ -16,3 +16,7 @@ export const getServerAuth = () => admin.auth(app)
 export const serverCollection = admin
   .firestore(app)
   .collection(process.env.DEV_FIRESTORE_COLLECTION ?? 'hot-cook')
+
+export const debugCollection = admin
+  .firestore(app)
+  .collection(process.env.DEV_SCRAPE_FIRESTORE_COLLECTION ?? '')

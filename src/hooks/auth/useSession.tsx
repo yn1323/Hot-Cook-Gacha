@@ -134,5 +134,6 @@ export const useSession = () => {
     handleSendPasswordResetMail,
     emailLoginLoading,
     waitForLoginRedirect,
+    uid: auth.currentUser?.uid ?? '',
   }
 }

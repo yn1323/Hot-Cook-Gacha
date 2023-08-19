@@ -8,6 +8,7 @@ import React from 'react'
 import { AiFillHome } from 'react-icons/ai'
 import {
   BsFillCalendarCheckFill,
+  BsFillKeyFill,
   BsFillPersonFill,
   BsSearch,
 } from 'react-icons/bs'
@@ -31,6 +32,15 @@ const Icons = [
     icon: BsFillPersonFill,
     link: '/mypage',
   },
+  ...(process.env.NEXT_PUBLIC_IS_LOCAL
+    ? [
+        {
+          label: '管理者向け',
+          icon: BsFillKeyFill,
+          link: '/admin/scrape',
+        },
+      ]
+    : []),
 ]
 
 export const LayoutStyles = { NavHeight: 14, Padding: 4, HeaderHeight: 12 }
