@@ -28,7 +28,6 @@ export const useSession = () => {
   useLayoutEffect(() => {
     auth.onAuthStateChanged(user => {
       window.sessionStorage.removeItem('pending')
-      setLoginPending(false)
       if (user) {
         setIsLoggedIn(true)
         user.getIdToken().then(token => {
@@ -41,6 +40,7 @@ export const useSession = () => {
       } else {
         setIsLoggedIn(false)
       }
+      setLoginPending(false)
     })
   }, [auth, router])
 
@@ -128,6 +128,7 @@ export const useSession = () => {
     logout,
     logoutPending,
     isLoggedIn,
+    loginPending,
     handleGoogleLogin,
     handleEmailLogin,
     handleEmailRegister,

@@ -1,7 +1,5 @@
 import { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
-import { Suspense } from 'react'
-import { PageLoading } from '@/components/layout/PageLoading'
 import { CheckLogin } from '@/components/layout/wrapper/CheckLogin'
 import { Providers } from '@/config/Providers'
 
@@ -27,9 +25,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={font.className}>
         <Providers>
-          <Suspense fallback={<PageLoading />}>
-            <CheckLogin>{children}</CheckLogin>
-          </Suspense>
+          <CheckLogin>{children}</CheckLogin>
         </Providers>
       </body>
     </html>
