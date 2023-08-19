@@ -16,7 +16,6 @@ export async function registerRecipeFormAction(
   schema: AdminPostSchema,
   option: { uid?: string; recipeId?: string }
 ) {
-  console.log('aaaaa')
   let error = false
   try {
     // 開発環境に登録
