@@ -47,7 +47,7 @@
     "@types/node": "20.9.0",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",
-    "chromatic": "^7.0.0",
+    "chromatic": "^9.0.0",
     "encoding": "^0.1.13",
     "eslint": "8.53.0",
     "eslint-config-next": "13.4.19",
